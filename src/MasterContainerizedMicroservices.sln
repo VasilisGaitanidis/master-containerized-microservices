@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FBD7D8D9-0891-42EE-A6CB-1D34D6CBB9B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{07112495-2FC3-452D-A5E6-27D4FD1F283E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{9325F5D9-051D-4744-B23E-732FF033FD3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Api", "Services\Ordering\Ordering.Api\Ordering.Api.csproj", "{986FBCDB-DC2C-4CF6-B5F0-0556FE3063A7}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{EA4281BC-E6DC-4C93-808C-470D89DB4BC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{986FBCDB-DC2C-4CF6-B5F0-0556FE3063A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{986FBCDB-DC2C-4CF6-B5F0-0556FE3063A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{986FBCDB-DC2C-4CF6-B5F0-0556FE3063A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{986FBCDB-DC2C-4CF6-B5F0-0556FE3063A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4281BC-E6DC-4C93-808C-470D89DB4BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4281BC-E6DC-4C93-808C-470D89DB4BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4281BC-E6DC-4C93-808C-470D89DB4BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4281BC-E6DC-4C93-808C-470D89DB4BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07112495-2FC3-452D-A5E6-27D4FD1F283E} = {FBD7D8D9-0891-42EE-A6CB-1D34D6CBB9B1}
+		{9325F5D9-051D-4744-B23E-732FF033FD3D} = {07112495-2FC3-452D-A5E6-27D4FD1F283E}
+		{986FBCDB-DC2C-4CF6-B5F0-0556FE3063A7} = {9325F5D9-051D-4744-B23E-732FF033FD3D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D602390D-6770-485E-B9EC-BD94F70F45B1}
+	EndGlobalSection
+EndGlobal
