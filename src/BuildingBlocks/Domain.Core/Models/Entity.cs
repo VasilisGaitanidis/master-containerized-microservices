@@ -11,7 +11,7 @@ namespace Domain.Core.Models
             Id = Guid.NewGuid();
         }
 
-        public Guid Id { get; protected set; }
+        public Guid Id { get; }
 
         private List<DomainEvent> _domainEvents;
         public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
