@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Core.Messaging;
 
-namespace Ordering.Domain.Core
+namespace Domain.Core.Models
 {
     public abstract class Entity : IEquatable<Entity>
     {

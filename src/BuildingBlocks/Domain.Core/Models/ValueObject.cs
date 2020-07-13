@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ordering.Domain.Core
+namespace Domain.Core.Models
 {
     public abstract class ValueObject : IEquatable<ValueObject>
     {

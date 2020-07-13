@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ordering.Domain.Core
+namespace Domain.Core.Exceptions
 {
     /// <summary>
     /// Exception type for domain exceptions

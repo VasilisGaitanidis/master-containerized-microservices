@@ -1,4 +1,4 @@
-﻿namespace Ordering.Domain.Core
+﻿namespace Domain.Core.Models
 {
     public interface IAggregateRoot { }
 }

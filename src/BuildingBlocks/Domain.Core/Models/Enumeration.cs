@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ordering.Domain.Core
+namespace Domain.Core.Models
 {
     /// <summary>
     /// Enumeration class based on https://lostechies.com/jimmybogard/2008/08/12/enumeration-classes/

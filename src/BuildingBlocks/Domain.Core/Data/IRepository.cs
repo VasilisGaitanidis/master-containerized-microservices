@@ -1,6 +1,7 @@
 ﻿using System;
+using Domain.Core.Models;
 
-namespace Ordering.Domain.Core
+namespace Domain.Core.Data
 {
     public interface IRepository<T> : IDisposable where T : IAggregateRoot
     {

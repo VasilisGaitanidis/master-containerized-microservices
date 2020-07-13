@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Ordering.Domain.Core
+namespace Domain.Core.Messaging
 {
     public abstract class DomainEvent : INotification
     {
