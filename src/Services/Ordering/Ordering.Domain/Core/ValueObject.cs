@@ -10,11 +10,13 @@ namespace Ordering.Domain.Core
 
         public static bool operator ==(ValueObject obj1, ValueObject obj2)
         {
-            if (ReferenceEquals(obj1, null) ^ ReferenceEquals(obj2, null))
-            {
+            if (obj1 is null && obj2 is null)
+                return true;
+
+            if (obj1 is null || obj2 is null)
                 return false;
-            }
-            return ReferenceEquals(obj1, null) || obj1.Equals(obj2);
+
+            return obj1.Equals(obj2);
         }
 
         public static bool operator !=(ValueObject obj1, ValueObject obj2)
