@@ -3,8 +3,16 @@ using Domain.Core.Models;
 
 namespace Domain.Core.Data
 {
-    public interface IRepository<T> : IDisposable where T : IAggregateRoot
+    /// <summary>
+    /// The repository pattern.
+    /// </summary>
+    /// <typeparam name="TEntity">The aggregate root entity.</typeparam>
+    /// <typeparam name="TId">The aggregate root identifier.</typeparam>
+    public interface IRepository<TEntity, TId> : IDisposable where TEntity : class, IAggregateRoot<TId>
     {
+        /// <summary>
+        /// The unit of work.
+        /// </summary>
         IUnitOfWork UnitOfWork { get; }
     }
 }
