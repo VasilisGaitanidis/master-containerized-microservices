@@ -5,11 +5,57 @@ using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 
 namespace Infrastructure.Bus
 {
     public static class MassTransitServiceCollectionExtensions
     {
+        public static IServiceCollection AddPublisher(this IServiceCollection services, IConfiguration configuration)
+        {
+            var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("rabbitMq");
+
+            services.AddSingleton(provider => MassTransit.Bus.Factory.CreateUsingRabbitMq(configurator =>
+            {
+                configurator.Host(rabbitMqOptions.Host, rabbitMqOptions.VirtualHost, hostConfigurator =>
+                {
+                    hostConfigurator.Username(rabbitMqOptions.Username);
+                    hostConfigurator.Password(rabbitMqOptions.Password);
+                });
+
+                configurator.ExchangeType = ExchangeType.Direct;
+            }));
+
+            services.AddSingleton<IPublishEndpoint>(provider => provider.GetRequiredService<IBusControl>());
+            services.AddSingleton<ISendEndpointProvider>(provider => provider.GetRequiredService<IBusControl>());
+            services.AddSingleton<IBus>(provider => provider.GetRequiredService<IBusControl>());
+
+            return services;
+        }
+
+        public static IServiceCollection AddSubscriber(this IServiceCollection services, IConfiguration configuration)
+        {
+            var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("rabbitMq");
+
+            services.AddMassTransit(c =>
+            {
+                c.AddConsumer<EventConsumer>();
+            });
+
+            services.AddSingleton(provider => MassTransit.Bus.Factory.CreateUsingRabbitMq(configurator =>
+            {
+                configurator.Host(rabbitMqOptions.Host, rabbitMqOptions.VirtualHost, hostConfigurator =>
+                {
+                    hostConfigurator.Username(rabbitMqOptions.Username);
+                    hostConfigurator.Password(rabbitMqOptions.Password);
+                });
+                //configurator.SetLoggerFactory(provider.GetService<ILoggerFactory>());
+
+            }));
+
+            return services;
+        }
+
         public static IServiceCollection AddProducer(this IServiceCollection services, IConfiguration configuration)
         {
             var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("rabbitMq");
@@ -49,10 +95,8 @@ namespace Infrastructure.Bus
                         hostConfigurator.Password(rabbitMqOptions.Password);
                     });
 
-                    configurator.ReceiveEndpoint("event-listener", e =>
-                    {
-                        e.ConfigureConsumer<EventConsumer>(context);
-                    });
+                    configurator.ReceiveEndpoint("event-listener",
+                        e => { e.ConfigureConsumer<EventConsumer>(context); });
                 });
             });
 
