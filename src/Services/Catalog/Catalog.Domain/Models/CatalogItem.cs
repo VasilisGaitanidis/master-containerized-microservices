@@ -13,7 +13,8 @@ namespace Catalog.Domain.Models
 
         private int _stock;
 
-        private CatalogType _catalogType;
+        public CatalogType CatalogType { get; private set; }
+        private Guid _catalogTypeId;
 
         public CatalogItem(string name, string description, decimal price, int stock, CatalogType catalogType)
             : base(Guid.NewGuid())
@@ -22,7 +23,7 @@ namespace Catalog.Domain.Models
             _description = description;
             _price = price;
             _stock = stock;
-            _catalogType = catalogType;
+            CatalogType = catalogType;
         }
 
     }
