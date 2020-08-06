@@ -4,7 +4,7 @@ using Domain.Core.Models;
 namespace Domain.Core.Data
 {
     /// <summary>
-    /// The repository pattern.
+    /// The <typeparamref name="TEntity"/> repository pattern.
     /// </summary>
     /// <typeparam name="TEntity">The aggregate root entity.</typeparam>
     /// <typeparam name="TId">The aggregate root identifier.</typeparam>
