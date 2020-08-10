@@ -5,7 +5,7 @@ namespace Catalog.Api.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder AddSwagger(IApplicationBuilder app, IWebHostEnvironment env)
+        public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app)
         {
             app.UseSwagger().UseSwaggerUI(c =>
             {
