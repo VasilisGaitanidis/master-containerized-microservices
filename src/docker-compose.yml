@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.Api/Dockerfile
+
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.Api/Dockerfile
+
