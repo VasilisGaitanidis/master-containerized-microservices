@@ -5,8 +5,8 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>ea4281bc-e6dc-4c93-808c-470d89db4bc3</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
-    <DockerServiceName>ordering.api</DockerServiceName>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/home</DockerServiceUrl>
+    <DockerServiceName>catalog.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
