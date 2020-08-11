@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Catalog.Domain.Models;
@@ -26,6 +27,14 @@ namespace Catalog.Infrastructure.Repositories
                 .SingleOrDefaultAsync();
 
             return catalogItem;
+        }
+
+        public async Task<List<CatalogItem>> GetCatalogItemsAsync()
+        {
+            var catalogItems = await _context.CatalogItems
+                .ToListAsync();
+
+            return catalogItems;
         }
 
         public Task<CatalogItem> AddAsync(CatalogItem catalogItem)
