@@ -27,6 +27,11 @@ namespace Catalog.Infrastructure.EntityConfigurations
                 .HasColumnName("price")
                 .IsRequired();
 
+            builder.Property<int>("_stock")
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasColumnName("stock")
+                .IsRequired();
+
             builder.HasOne(c => c.CatalogType)
                 .WithMany()
                 .HasForeignKey("_catalogTypeId");
