@@ -20,8 +20,11 @@ namespace Catalog.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCustomControllers()
-                .AddCustomSwagger(Configuration)
-                .AddCustomMediatR();
+                .AddCustomDbContext(Configuration)
+                .AddRepositories()
+                .AddSwagger(Configuration)
+                .AddMediatR()
+                .AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

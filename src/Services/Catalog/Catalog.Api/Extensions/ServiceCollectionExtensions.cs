@@ -1,4 +1,10 @@
-﻿using MediatR;
+﻿using System.Reflection;
+using AutoMapper;
+using Catalog.Domain.Repositories;
+using Catalog.Infrastructure;
+using Catalog.Infrastructure.Repositories;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -14,7 +20,7 @@ namespace Catalog.Api.Extensions
             return services;
         }
 
-        public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSwaggerGen(x =>
             {
@@ -28,9 +34,38 @@ namespace Catalog.Api.Extensions
 
             return services;
         }
-        public static IServiceCollection AddCustomMediatR(this IServiceCollection services)
+
+        public static IServiceCollection AddMediatR(this IServiceCollection services)
         {
             services.AddMediatR(typeof(Startup));
+
+            return services;
+        }
+
+        public static IServiceCollection AddAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(Startup));
+
+            return services;
+        }
+
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<ICatalogItemRepository, CatalogItemRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<CatalogDataContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                    sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                    });
+            });
 
             return services;
         }
