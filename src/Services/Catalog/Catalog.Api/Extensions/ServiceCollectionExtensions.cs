@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -24,6 +25,12 @@ namespace Catalog.Api.Extensions
                     Description = "The catalog microservice."
                 });
             });
+
+            return services;
+        }
+        public static IServiceCollection AddCustomMediatR(this IServiceCollection services)
+        {
+            services.AddMediatR(typeof(Startup));
 
             return services;
         }
