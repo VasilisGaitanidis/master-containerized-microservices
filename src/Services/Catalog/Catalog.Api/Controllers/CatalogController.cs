@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Catalog.Application.Dtos;
-using Catalog.Application.Queries;
+using Catalog.Api.Application.Dtos;
+using Catalog.Api.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Catalog.Application.Dtos;
+using Catalog.Api.Application.Dtos;
 using MediatR;
 
-namespace Catalog.Application.Queries
+namespace Catalog.Api.Application.Queries
 {
     public class GetCatalogItemsQuery : IRequest<IEnumerable<CatalogItemResponseDto>>
     {

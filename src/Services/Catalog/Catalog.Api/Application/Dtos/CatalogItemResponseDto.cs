@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalog.Application.Dtos
+namespace Catalog.Api.Application.Dtos
 {
     public class CatalogItemResponseDto
     {
