@@ -12,6 +12,8 @@ namespace Catalog.Infrastructure.EntityConfigurations
 
             builder.HasKey(c => c.Id);
 
+            builder.Ignore(c => c.DomainEvents);
+
             builder.Property<string>("_name")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("name")
