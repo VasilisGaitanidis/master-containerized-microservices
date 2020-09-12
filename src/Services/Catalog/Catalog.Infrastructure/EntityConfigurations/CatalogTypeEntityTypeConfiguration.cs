@@ -12,6 +12,9 @@ namespace Catalog.Infrastructure.EntityConfigurations
 
             builder.HasKey(t => t.Id);
 
+            builder.Property(c => c.Id)
+                .HasColumnName("id");
+
             builder.Property<string>("_name")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("name")

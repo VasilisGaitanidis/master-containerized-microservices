@@ -1,4 +1,5 @@
-﻿using Catalog.Domain.Models;
+﻿using System;
+using Catalog.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,6 +12,9 @@ namespace Catalog.Infrastructure.EntityConfigurations
             builder.ToTable("catalog_items");
 
             builder.HasKey(c => c.Id);
+
+            builder.Property(c => c.Id)
+                .HasColumnName("id");
 
             builder.Ignore(c => c.DomainEvents);
 
@@ -38,6 +42,9 @@ namespace Catalog.Infrastructure.EntityConfigurations
             builder.HasOne(c => c.CatalogType)
                 .WithMany()
                 .HasForeignKey("_catalogTypeId");
+
+            builder.Property<Guid>("_catalogTypeId")
+                .HasColumnName("catalog_type_id");
         }
     }
 }
