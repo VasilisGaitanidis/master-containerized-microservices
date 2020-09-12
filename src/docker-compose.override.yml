@@ -1,6 +1,15 @@
 version: '3.4'
 
 services:
+  sqlserver:
+    environment:
+      - SA_PASSWORD=<MyStrongP@ssw0rd>
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -12,4 +21,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5002:80"
+
+volumes:
+  sqlserver-data:
+    external: false
 
