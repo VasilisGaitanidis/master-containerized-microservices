@@ -13,6 +13,7 @@ services:
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=catalog-service;User Id=sa;Password=<MyStrongP@ssw0rd>;
     ports:
       - "5001:80"
 
