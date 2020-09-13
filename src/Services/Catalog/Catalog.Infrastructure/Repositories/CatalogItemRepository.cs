@@ -37,9 +37,11 @@ namespace Catalog.Infrastructure.Repositories
             return catalogItems;
         }
 
-        public Task<CatalogItem> AddAsync(CatalogItem catalogItem)
+        public async Task<CatalogItem> AddAsync(CatalogItem catalogItem)
         {
-            throw new NotImplementedException();
+            var entityEntry = await _context.CatalogItems.AddAsync(catalogItem);
+
+            return entityEntry.Entity;
         }
 
         public Task UpdateAsync(CatalogItem catalogItem)

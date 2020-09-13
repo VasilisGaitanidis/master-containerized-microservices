@@ -13,5 +13,7 @@ namespace Catalog.Api.Application.Dtos
         public decimal Price { get; set; }
 
         public int Stock { get; set; }
+
+        public CatalogTypeResponseDto CatalogType { get; set; }
     }
 }

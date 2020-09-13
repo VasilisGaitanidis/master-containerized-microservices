@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Catalog.Api.Application.Commands;
 using Catalog.Api.Application.Dtos;
 using Catalog.Api.Application.Queries;
 using MediatR;
@@ -20,13 +21,13 @@ namespace Catalog.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpGet("catalog-items")]
+        [HttpGet("items")]
         [ProducesResponseType(typeof(IEnumerable<CatalogItemResponseDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemsAsync()
             => Ok(await _mediator.Send(new GetCatalogItemsQuery()));
 
-        [HttpGet("{id:Guid}", Name = "GetCatalogItem")]
+        [HttpGet("items/{id:Guid}", Name = "GetCatalogItem")]
         [ProducesResponseType(typeof(CatalogItemResponseDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemAsync(Guid id)
@@ -36,10 +37,13 @@ namespace Catalog.Api.Controllers
             return result == null ? NotFound() : (IActionResult)Ok(result);
         }
 
-        // POST api/<CatalogController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("items")]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public async Task<IActionResult> CreateCatalogItemAsync(CreateCatalogItemCommand command)
         {
+            var result = await _mediator.Send(command);
+
+            return CreatedAtRoute("GetCatalogItem", new { id = result.Id }, result);
         }
 
         // PUT api/<CatalogController>/5
