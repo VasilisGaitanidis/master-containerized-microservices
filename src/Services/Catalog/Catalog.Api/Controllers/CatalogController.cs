@@ -20,7 +20,7 @@ namespace Catalog.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpGet("catalogitems")]
+        [HttpGet("catalog-items")]
         [ProducesResponseType(typeof(IEnumerable<CatalogItemResponseDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemsAsync()
