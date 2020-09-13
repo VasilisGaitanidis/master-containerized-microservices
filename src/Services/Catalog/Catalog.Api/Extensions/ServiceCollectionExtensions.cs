@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using AutoMapper;
+using Catalog.Api.Application.Behaviors;
 using Catalog.Domain.Repositories;
 using Catalog.Infrastructure;
 using Catalog.Infrastructure.Repositories;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,6 +40,20 @@ namespace Catalog.Api.Extensions
         public static IServiceCollection AddMediatR(this IServiceCollection services)
         {
             services.AddMediatR(typeof(Startup));
+
+            return services;
+        }
+        
+        public static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
+        {
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
+
+            return services;
+        }
+
+        public static IServiceCollection AddValidators(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
             return services;
         }

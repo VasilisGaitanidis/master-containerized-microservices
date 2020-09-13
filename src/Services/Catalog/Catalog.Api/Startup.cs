@@ -24,6 +24,8 @@ namespace Catalog.Api
                 .AddRepositories()
                 .AddSwagger(Configuration)
                 .AddMediatR()
+                .AddPipelineBehaviors()
+                .AddValidators()
                 .AddAutoMapper();
         }
 
