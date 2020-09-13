@@ -8,16 +8,11 @@ namespace Catalog.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CatalogType> builder)
         {
-            builder.ToTable("catalog_types");
-
             builder.HasKey(t => t.Id);
-
-            builder.Property(c => c.Id)
-                .HasColumnName("id");
 
             builder.Property<string>("_name")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("name")
+                .HasColumnName("Name")
                 .IsRequired();
         }
     }

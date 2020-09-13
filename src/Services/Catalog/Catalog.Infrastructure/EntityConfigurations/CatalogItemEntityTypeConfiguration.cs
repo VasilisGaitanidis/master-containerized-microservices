@@ -9,34 +9,29 @@ namespace Catalog.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CatalogItem> builder)
         {
-            builder.ToTable("catalog_items");
-
             builder.HasKey(c => c.Id);
-
-            builder.Property(c => c.Id)
-                .HasColumnName("id");
 
             builder.Ignore(c => c.DomainEvents);
 
             builder.Property<string>("_name")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("name")
+                .HasColumnName("Name")
                 .IsRequired();
 
             builder.Property<string>("_description")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("description")
+                .HasColumnName("Description")
                 .IsRequired(false);
 
             builder.Property<decimal>("_price")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("price")
+                .HasColumnName("Price")
                 .HasColumnType("decimal(18,4)")
                 .IsRequired();
 
             builder.Property<int>("_stock")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("stock")
+                .HasColumnName("Stock")
                 .IsRequired();
 
             builder.HasOne(c => c.CatalogType)
@@ -44,7 +39,7 @@ namespace Catalog.Infrastructure.EntityConfigurations
                 .HasForeignKey("_catalogTypeId");
 
             builder.Property<Guid>("_catalogTypeId")
-                .HasColumnName("catalog_type_id");
+                .HasColumnName("CatalogTypeId");
         }
     }
 }
