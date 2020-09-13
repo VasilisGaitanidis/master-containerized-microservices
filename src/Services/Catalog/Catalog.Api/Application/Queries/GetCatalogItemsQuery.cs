@@ -6,6 +6,5 @@ namespace Catalog.Api.Application.Queries
 {
     public class GetCatalogItemsQuery : IRequest<IEnumerable<CatalogItemResponseDto>>
     {
-        
     }
 }

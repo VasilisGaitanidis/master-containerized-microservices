@@ -24,17 +24,16 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<CatalogItemResponseDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemsAsync()
-        {
-            var result = await _mediator.Send(new GetCatalogItemsQuery());
+            => Ok(await _mediator.Send(new GetCatalogItemsQuery()));
 
-            return Ok(result);
-        }
-
-        // GET api/<CatalogController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id:Guid}", Name = "GetCatalogItem")]
+        [ProducesResponseType(typeof(CatalogItemResponseDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetCatalogItemAsync(Guid id)
         {
-            return "value";
+            var result = await _mediator.Send(new GetCatalogItemQuery(id));
+
+            return result == null ? NotFound() : (IActionResult)Ok(result);
         }
 
         // POST api/<CatalogController>
