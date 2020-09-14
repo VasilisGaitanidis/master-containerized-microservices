@@ -43,7 +43,7 @@ namespace Catalog.Api.Extensions
 
             return services;
         }
-        
+
         public static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
         {
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
@@ -76,11 +76,12 @@ namespace Catalog.Api.Extensions
         {
             services.AddDbContext<CatalogDataContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                    sqlOptions =>
-                    {
-                        sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                    });
+                options.UseLazyLoadingProxies().
+                    UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                        sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                        });
             });
 
             return services;

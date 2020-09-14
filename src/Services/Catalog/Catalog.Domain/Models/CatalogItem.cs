@@ -13,7 +13,7 @@ namespace Catalog.Domain.Models
 
         private int _stock;
 
-        public CatalogType CatalogType { get; private set; }
+        public virtual CatalogType CatalogType { get; private set; }
         private Guid _catalogTypeId;
 
         /// <summary>
