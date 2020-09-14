@@ -32,7 +32,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemAsync(Guid id)
         {
-            var result = await _mediator.Send(new GetCatalogItemQuery(id));
+            var result = await _mediator.Send(new GetCatalogItemByIdQuery(id));
 
             return result == null ? NotFound() : (IActionResult)Ok(result);
         }

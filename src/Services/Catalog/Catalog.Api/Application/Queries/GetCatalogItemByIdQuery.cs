@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Catalog.Api.Application.Queries
 {
-    public class GetCatalogItemQuery : IRequest<CatalogItemResponseDto>
+    public class GetCatalogItemByIdQuery : IRequest<CatalogItemResponseDto>
     {
         /// <summary>
         /// The catalog item identifier
@@ -15,7 +15,7 @@ namespace Catalog.Api.Application.Queries
         /// Initializes a new instance.
         /// </summary>
         /// <param name="id">The catalog item identifier.</param>
-        public GetCatalogItemQuery(Guid id)
+        public GetCatalogItemByIdQuery(Guid id)
         {
             Id = id;
         }

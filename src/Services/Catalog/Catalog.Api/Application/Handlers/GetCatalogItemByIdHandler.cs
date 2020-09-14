@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,18 +9,18 @@ using MediatR;
 
 namespace Catalog.Api.Application.Handlers
 {
-    public class GetCatalogItemHandler : IRequestHandler<GetCatalogItemQuery, CatalogItemResponseDto>
+    public class GetCatalogItemByIdHandler : IRequestHandler<GetCatalogItemByIdQuery, CatalogItemResponseDto>
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
         private readonly IMapper _mapper;
 
-        public GetCatalogItemHandler(ICatalogItemRepository catalogItemRepository, IMapper mapper)
+        public GetCatalogItemByIdHandler(ICatalogItemRepository catalogItemRepository, IMapper mapper)
         {
             _catalogItemRepository = catalogItemRepository ?? throw new ArgumentNullException(nameof(catalogItemRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<CatalogItemResponseDto> Handle(GetCatalogItemQuery request, CancellationToken cancellationToken)
+        public async Task<CatalogItemResponseDto> Handle(GetCatalogItemByIdQuery request, CancellationToken cancellationToken)
         {
             var catalogItem = await _catalogItemRepository.GetCatalogItemAsync(request.Id);
 
