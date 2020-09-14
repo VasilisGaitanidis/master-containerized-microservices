@@ -8,7 +8,14 @@ namespace Catalog.Api.Application.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<CatalogItem, CatalogItemResponseDto>();
+            CreateMap<CatalogItem, CatalogItemResponseDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom("_name"))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom("_description"))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom("_price"))
+                .ForMember(dest => dest.Stock, opt => opt.MapFrom("_stock"));
+
+            CreateMap<CatalogType, CatalogTypeResponseDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom("_name"));
         }
     }
 }
