@@ -44,14 +44,16 @@ namespace Catalog.Infrastructure.Repositories
             return entityEntry.Entity;
         }
 
-        public Task UpdateAsync(CatalogItem catalogItem)
+        public void Update(CatalogItem catalogItem)
         {
-            throw new NotImplementedException();
+            _context.Entry(catalogItem).State = EntityState.Modified;
+
+            _context.CatalogItems.Attach(catalogItem);
         }
 
-        public Task DeleteAsync(Guid id)
+        public void Delete(CatalogItem catalogItem)
         {
-            throw new NotImplementedException();
+            _context.CatalogItems.Remove(catalogItem);
         }
     }
 }
