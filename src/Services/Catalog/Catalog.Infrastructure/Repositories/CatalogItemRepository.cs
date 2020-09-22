@@ -48,11 +48,13 @@ namespace Catalog.Infrastructure.Repositories
         {
             _context.Entry(catalogItem).State = EntityState.Modified;
 
-            _context.CatalogItems.Attach(catalogItem);
+            _context.Update(catalogItem);
         }
 
         public void Delete(CatalogItem catalogItem)
         {
+            _context.Entry(catalogItem).State = EntityState.Deleted;
+
             _context.CatalogItems.Remove(catalogItem);
         }
     }
