@@ -46,6 +46,7 @@ namespace Catalog.Api.Extensions
 
         public static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
         {
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
 
             return services;
