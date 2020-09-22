@@ -8,6 +8,8 @@ namespace Catalog.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CatalogType> builder)
         {
+            builder.ToTable("CatalogType", CatalogDataContext.DefaultSchema);
+
             builder.HasKey(t => t.Id);
 
             builder.Property<string>("_name")
