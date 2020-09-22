@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Transactions;
 using Catalog.Infrastructure;
 using MediatR;
 using Microsoft.Extensions.Logging;
