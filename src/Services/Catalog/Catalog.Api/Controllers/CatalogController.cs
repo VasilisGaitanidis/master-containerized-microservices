@@ -46,14 +46,22 @@ namespace Catalog.Api.Controllers
             return CreatedAtRoute("GetCatalogItem", new { id = result.Id }, result);
         }
 
-        // PUT api/<CatalogController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("items/{id:Guid}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> UpdateCatalogItemAsync(Guid id, [FromBody] UpdateCatalogItemCommand command)
         {
+            command.Id = id;
+
+            var result = await _mediator.Send(command);
+
+            if (!result)
+                return BadRequest();
+
+            return Ok();
         }
 
-        // DELETE api/<CatalogController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("items/{id:Guid}")]
         public void Delete(int id)
         {
         }
