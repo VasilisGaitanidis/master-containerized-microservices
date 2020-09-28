@@ -4,8 +4,6 @@ namespace Catalog.Api.Application.Dtos.Requests
 {
     public class UpdateCatalogItemDto
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
