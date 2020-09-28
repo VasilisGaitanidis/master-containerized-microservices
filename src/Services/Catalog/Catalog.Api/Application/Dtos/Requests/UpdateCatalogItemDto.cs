@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Catalog.Api.Application.Dtos
+namespace Catalog.Api.Application.Dtos.Requests
 {
-    public class CatalogItemResponseDto
+    public class UpdateCatalogItemDto
     {
         public Guid Id { get; set; }
 
@@ -14,6 +14,6 @@ namespace Catalog.Api.Application.Dtos
 
         public int Stock { get; set; }
 
-        public CatalogTypeResponseDto CatalogType { get; set; }
+        public Guid CatalogTypeId { get; set; }
     }
 }

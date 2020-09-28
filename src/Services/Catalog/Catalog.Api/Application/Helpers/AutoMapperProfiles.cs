@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Catalog.Api.Application.Dtos;
+using Catalog.Api.Application.Dtos.Responses;
 using Catalog.Domain.Models;
 
 namespace Catalog.Api.Application.Helpers
@@ -8,14 +8,18 @@ namespace Catalog.Api.Application.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<CatalogItem, CatalogItemResponseDto>()
+            #region Responses
+
+            CreateMap<CatalogItem, CatalogItemDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom("_name"))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom("_description"))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom("_price"))
                 .ForMember(dest => dest.Stock, opt => opt.MapFrom("_stock"));
 
-            CreateMap<CatalogType, CatalogTypeResponseDto>()
+            CreateMap<CatalogType, CatalogTypeDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom("_name"));
+
+            #endregion
         }
     }
 }

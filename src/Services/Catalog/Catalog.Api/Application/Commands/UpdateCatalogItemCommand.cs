@@ -5,16 +5,26 @@ namespace Catalog.Api.Application.Commands
 {
     public class UpdateCatalogItemCommand : IRequest<bool>
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
-        public string  Name { get; set; }
+        public string Name { get; }
 
-        public string Description { get; set; }
+        public string Description { get; }
 
-        public decimal Price { get; set; }
+        public decimal Price { get; }
 
-        public int Stock { get; set; }
+        public int Stock { get; }
 
-        public Guid CatalogTypeId { get; set; }
+        public Guid CatalogTypeId { get; }
+
+        public UpdateCatalogItemCommand(Guid id, string name, string description, decimal price, int stock, Guid catalogTypeId)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            Price = price;
+            Stock = stock;
+            CatalogTypeId = catalogTypeId;
+        }
     }
 }

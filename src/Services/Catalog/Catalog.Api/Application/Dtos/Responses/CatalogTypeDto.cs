@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Catalog.Api.Application.Dtos
+namespace Catalog.Api.Application.Dtos.Responses
 {
-    public class CatalogTypeResponseDto
+    public class CatalogTypeDto
     {
         public Guid Id { get; set; }
 

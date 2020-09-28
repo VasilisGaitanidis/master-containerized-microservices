@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Catalog.Api.Application.Dtos;
+using Catalog.Api.Application.Dtos.Responses;
 using Catalog.Api.Application.Queries;
 using Catalog.Api.Controllers;
 using MediatR;
@@ -27,7 +27,7 @@ namespace Catalog.UnitTests
         {
             // Arrange
             var fakeCatalogItemId = Guid.Empty;
-            var fakeDynamicResult = new CatalogItemResponseDto();
+            var fakeDynamicResult = new CatalogItemDto();
             _mediatorMock.Setup(x => x.Send(It.IsAny<GetCatalogItemByIdQuery>(), default))
                 .Returns(Task.FromResult(fakeDynamicResult));
 
@@ -45,7 +45,7 @@ namespace Catalog.UnitTests
             // Arrange
             var fakeCatalogItemId = Guid.Empty;
             _mediatorMock.Setup(x => x.Send(It.IsAny<GetCatalogItemByIdQuery>(), default))
-                .Returns(Task.FromResult((CatalogItemResponseDto)null));
+                .Returns(Task.FromResult((CatalogItemDto)null));
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);

@@ -1,5 +1,4 @@
-﻿using System;
-using Domain.Core.Models;
+﻿using Domain.Core.Models;
 
 namespace Domain.Core.Data
 {

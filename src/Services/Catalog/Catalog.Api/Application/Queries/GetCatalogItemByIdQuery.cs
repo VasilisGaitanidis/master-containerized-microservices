@@ -1,10 +1,10 @@
 ﻿using System;
-using Catalog.Api.Application.Dtos;
+using Catalog.Api.Application.Dtos.Responses;
 using MediatR;
 
 namespace Catalog.Api.Application.Queries
 {
-    public class GetCatalogItemByIdQuery : IRequest<CatalogItemResponseDto>
+    public class GetCatalogItemByIdQuery : IRequest<CatalogItemDto>
     {
         /// <summary>
         /// The catalog item identifier

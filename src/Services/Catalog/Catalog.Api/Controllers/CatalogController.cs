@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Catalog.Api.Application.Commands;
-using Catalog.Api.Application.Dtos;
+using Catalog.Api.Application.Dtos.Requests;
+using Catalog.Api.Application.Dtos.Responses;
 using Catalog.Api.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +23,13 @@ namespace Catalog.Api.Controllers
         }
 
         [HttpGet("items")]
-        [ProducesResponseType(typeof(IEnumerable<CatalogItemResponseDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<CatalogItemDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemsAsync()
             => Ok(await _mediator.Send(new GetCatalogItemsQuery()));
 
         [HttpGet("items/{id:Guid}", Name = "GetCatalogItem")]
-        [ProducesResponseType(typeof(CatalogItemResponseDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CatalogItemDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemAsync(Guid id)
         {
@@ -39,9 +40,9 @@ namespace Catalog.Api.Controllers
 
         [HttpPost("items")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<IActionResult> CreateCatalogItemAsync(CreateCatalogItemCommand command)
+        public async Task<IActionResult> CreateCatalogItemAsync([FromBody] CreateCatalogItemDto dto)
         {
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(new CreateCatalogItemCommand(dto.Name, dto.Description, dto.Price, dto.Stock, dto.CatalogTypeId));
 
             return CreatedAtRoute("GetCatalogItem", new { id = result.Id }, result);
         }
@@ -49,11 +50,9 @@ namespace Catalog.Api.Controllers
         [HttpPut("items/{id:Guid}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> UpdateCatalogItemAsync(Guid id, [FromBody] UpdateCatalogItemCommand command)
+        public async Task<IActionResult> UpdateCatalogItemAsync(Guid id, [FromBody] UpdateCatalogItemDto dto)
         {
-            command.Id = id;
-
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(new UpdateCatalogItemCommand(id, dto.Name, dto.Description, dto.Price, dto.Stock, dto.CatalogTypeId));
 
             if (!result)
                 return BadRequest();
