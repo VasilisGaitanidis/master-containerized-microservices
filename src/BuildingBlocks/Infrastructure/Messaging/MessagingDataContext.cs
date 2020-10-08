@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Core.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Messaging
 {
-    public class MessagingDataContext : DbContext
+    public class MessagingDataContext : DbContext, IUnitOfWork
     {
         /// <summary>
         /// The default database schema.
