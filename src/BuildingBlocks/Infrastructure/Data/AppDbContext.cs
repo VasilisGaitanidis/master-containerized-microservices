@@ -12,7 +12,7 @@ using ReflectionMagic;
 
 namespace Infrastructure.Data
 {
-    public abstract class AppDbContext : DbContext, ITransactionalContext
+    public abstract class AppDbContext : DbContext, ITransactionContext
     {
         private IDbContextTransaction _currentTransaction;
         private readonly IEnumerable<IDomainEventBus> _eventBuses = null;

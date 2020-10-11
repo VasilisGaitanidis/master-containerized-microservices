@@ -6,7 +6,7 @@ namespace Infrastructure.Data
     /// <summary>
     /// Provides transactional behavior.
     /// </summary>
-    public interface ITransactionalContext
+    public interface ITransactionContext
     {
         /// <summary>
         /// Begins an asynchronous transaction.
