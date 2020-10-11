@@ -28,7 +28,6 @@ namespace Infrastructure.EventBus.DomainEvents
 
             await _outboxMessageRepository.AddAsync(outboxMessage);
 
-            // save changes and dispatches domain events
             await _outboxMessageRepository.UnitOfWork.SaveChangesAsync();
 
             await _mediator.Publish(new DomainNotificationEnvelope(domainEvent));

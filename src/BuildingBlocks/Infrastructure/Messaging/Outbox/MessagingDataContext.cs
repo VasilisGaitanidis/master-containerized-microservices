@@ -1,10 +1,9 @@
 ﻿using Domain.Core.Data;
-using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Messaging.Outbox
 {
-    public class MessagingDataContext : AppDbContext, IUnitOfWork
+    public class MessagingDataContext : DbContext, IUnitOfWork
     {
         /// <summary>
         /// The default database schema.

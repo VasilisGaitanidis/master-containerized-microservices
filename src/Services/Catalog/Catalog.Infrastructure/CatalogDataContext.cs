@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using Catalog.Domain.Models;
 using Catalog.Infrastructure.EntityConfigurations;
 using Domain.Core.Data;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Catalog.Infrastructure
 {
-    public class CatalogDataContext : DbContext, IUnitOfWork, IDbContext
+    public class CatalogDataContext : AppDbContext, IUnitOfWork, IDbContext
     {
         /// <summary>
         /// The default database schema.
