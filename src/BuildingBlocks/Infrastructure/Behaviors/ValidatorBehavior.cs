@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalog.Domain.Exceptions;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Catalog.Api.Application.Behaviors
+namespace Infrastructure.Behaviors
 {
     public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
@@ -37,7 +36,7 @@ namespace Catalog.Api.Application.Behaviors
             {
                 _logger.LogWarning($"Validation errors on {typeof(TRequest).Name} - Errors: {failures}");
 
-                throw new CatalogDomainException(
+                throw new AppDomainUnloadedException(
                     $"Command validation errors for type {typeof(TRequest).Name}", new ValidationException(failures));
             }
 

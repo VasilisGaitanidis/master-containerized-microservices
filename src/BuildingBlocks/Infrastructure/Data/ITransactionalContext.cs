@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Catalog.Infrastructure
+namespace Infrastructure.Data
 {
-    public interface IDbContext
+    /// <summary>
+    /// Provides transactional behavior.
+    /// </summary>
+    public interface ITransactionalContext
     {
         /// <summary>
         /// Begins an asynchronous transaction.

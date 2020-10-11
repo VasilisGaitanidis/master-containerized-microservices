@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalog.Infrastructure;
+using Infrastructure.Data;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Catalog.Api.Application.Behaviors
+namespace Infrastructure.Behaviors
 {
     public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<TransactionBehavior<TRequest, TResponse>> _logger;
-        private readonly CatalogDataContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
-        public TransactionBehavior(ILogger<TransactionBehavior<TRequest, TResponse>> logger, CatalogDataContext dbContext)
+        public TransactionBehavior(ILogger<TransactionBehavior<TRequest, TResponse>> logger, AppDbContext dbContext)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));

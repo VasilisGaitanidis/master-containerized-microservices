@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
 using AutoMapper;
-using Catalog.Api.Application.Behaviors;
 using Catalog.Domain.Repositories;
 using Catalog.Infrastructure;
 using Catalog.Infrastructure.Repositories;
 using FluentValidation;
+using Infrastructure.Behaviors;
+using Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -85,6 +86,8 @@ namespace Catalog.Api.Extensions
                             sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
                         });
             });
+
+            services.AddScoped<AppDbContext>(provider => provider.GetService<CatalogDataContext>());
 
             return services;
         }
