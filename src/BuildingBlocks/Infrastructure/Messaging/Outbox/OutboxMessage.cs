@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Core.Models;
 
-namespace Infrastructure.Messaging
+namespace Infrastructure.Messaging.Outbox
 {
     public class OutboxMessage : AggregateRoot<Guid>
     {

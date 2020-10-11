@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Domain.Core.Data;
 
-namespace Infrastructure.Messaging
+namespace Infrastructure.Messaging.Outbox
 {
     public class OutboxMessageRepository : IOutboxMessageRepository
     {
@@ -12,6 +13,13 @@ namespace Infrastructure.Messaging
         public OutboxMessageRepository(MessagingDataContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
+
+        public async Task<OutboxMessage> AddAsync(OutboxMessage message)
+        {
+            var entityEntry = await _context.OutboxMessages.AddAsync(message);
+
+            return entityEntry.Entity;
         }
     }
 }
