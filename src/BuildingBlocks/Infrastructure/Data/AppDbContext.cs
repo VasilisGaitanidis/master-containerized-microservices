@@ -15,9 +15,9 @@ namespace Infrastructure.Data
     public abstract class AppDbContext : DbContext, ITransactionContext
     {
         private IDbContextTransaction _currentTransaction;
-        private readonly IEnumerable<IDomainEventBus> _eventBuses = null;
+        private readonly IEnumerable<IDomainEventDispatcher> _eventBuses = null;
 
-        protected AppDbContext(DbContextOptions options, IEnumerable<IDomainEventBus> eventBuses = null)
+        protected AppDbContext(DbContextOptions options, IEnumerable<IDomainEventDispatcher> eventBuses = null)
             : base(options)
         {
             _eventBuses = eventBuses;
@@ -54,7 +54,7 @@ namespace Infrastructure.Data
                 var domainEvents = rootAggregator.DomainEvents;
 
                 foreach (var domainEvent in domainEvents)
-                    _eventBuses.Select(b => b.Handle(domainEvent));
+                    _eventBuses.Select(b => b.Dispatch(domainEvent));
 
                 rootAggregator.ClearUncommittedEvents();
             }

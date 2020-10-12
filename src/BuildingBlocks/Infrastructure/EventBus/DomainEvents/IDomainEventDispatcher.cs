@@ -3,8 +3,8 @@ using Domain.Core.Messaging;
 
 namespace Infrastructure.EventBus.DomainEvents
 {
-    public interface IDomainEventBus
+    public interface IDomainEventDispatcher
     {
-        Task Handle(IDomainEvent domainEvent);
+        Task Dispatch(IDomainEvent domainEvent);
     }
 }

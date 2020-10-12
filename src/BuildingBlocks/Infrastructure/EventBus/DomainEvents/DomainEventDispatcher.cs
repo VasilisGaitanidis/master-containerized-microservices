@@ -7,18 +7,18 @@ using Newtonsoft.Json;
 
 namespace Infrastructure.EventBus.DomainEvents
 {
-    public class DomainEventBus : IDomainEventBus
+    public class DomainEventDispatcher : IDomainEventDispatcher
     {
         private readonly IOutboxMessageRepository _outboxMessageRepository;
         private readonly IMediator _mediator;
 
-        public DomainEventBus(IOutboxMessageRepository outboxMessageRepository, IMediator mediator)
+        public DomainEventDispatcher(IOutboxMessageRepository outboxMessageRepository, IMediator mediator)
         {
             _outboxMessageRepository = outboxMessageRepository ?? throw new ArgumentNullException(nameof(outboxMessageRepository));
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        public async Task Handle(IDomainEvent domainEvent)
+        public async Task Dispatch(IDomainEvent domainEvent)
         {
             var outboxMessage = new OutboxMessage(
                 domainEvent.Id,
@@ -30,7 +30,7 @@ namespace Infrastructure.EventBus.DomainEvents
 
             await _outboxMessageRepository.UnitOfWork.SaveChangesAsync();
 
-            await _mediator.Publish(new DomainNotificationEnvelope(domainEvent));
+            await _mediator.Publish(new DomainEnvelope<IDomainEvent>(domainEvent));
         }
     }
 }
