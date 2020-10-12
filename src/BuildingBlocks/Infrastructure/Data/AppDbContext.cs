@@ -15,12 +15,12 @@ namespace Infrastructure.Data
     public abstract class AppDbContext : DbContext, ITransactionContext
     {
         private IDbContextTransaction _currentTransaction;
-        private readonly IEnumerable<IDomainEventDispatcher> _eventBuses = null;
+        private readonly IEnumerable<IDomainEventDispatcher> _domainEventDispatchers = null;
 
-        protected AppDbContext(DbContextOptions options, IEnumerable<IDomainEventDispatcher> eventBuses = null)
+        protected AppDbContext(DbContextOptions options, IEnumerable<IDomainEventDispatcher> domainEventDispatchers = null)
             : base(options)
         {
-            _eventBuses = eventBuses;
+            _domainEventDispatchers = domainEventDispatchers;
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -54,7 +54,7 @@ namespace Infrastructure.Data
                 var domainEvents = rootAggregator.DomainEvents;
 
                 foreach (var domainEvent in domainEvents)
-                    _eventBuses.Select(b => b.Dispatch(domainEvent));
+                    _domainEventDispatchers.Select(b => b.Dispatch(domainEvent));
 
                 rootAggregator.ClearUncommittedEvents();
             }

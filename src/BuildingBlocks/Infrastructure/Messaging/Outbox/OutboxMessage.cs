@@ -11,12 +11,12 @@ namespace Infrastructure.Messaging.Outbox
         public DateTime OccurredOn { get; }
 
         /// <summary>
-        /// The event type.
+        /// The event type full name.
         /// </summary>
         public string Type { get; }
 
         /// <summary>
-        /// The event data.
+        /// The event data - serialized to JSON.
         /// </summary>
         public string Data { get; }
 

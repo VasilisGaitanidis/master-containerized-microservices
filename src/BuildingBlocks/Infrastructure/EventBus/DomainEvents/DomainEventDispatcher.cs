@@ -20,16 +20,18 @@ namespace Infrastructure.EventBus.DomainEvents
 
         public async Task Dispatch(IDomainEvent domainEvent)
         {
-            var outboxMessage = new OutboxMessage(
-                domainEvent.Id,
-                domainEvent.OccurredOn,
-                domainEvent.GetType().Name,
-                JsonConvert.SerializeObject(domainEvent));
+            // TODO refactor OutboxMessage
+            //var outboxMessage = new OutboxMessage(
+            //    domainEvent.Id,
+            //    domainEvent.OccurredOn,
+            //    domainEvent.GetType().FullName,
+            //    JsonConvert.SerializeObject(domainEvent));
 
-            await _outboxMessageRepository.AddAsync(outboxMessage);
+            //await _outboxMessageRepository.AddAsync(outboxMessage);
 
-            await _outboxMessageRepository.UnitOfWork.SaveChangesAsync();
+            //await _outboxMessageRepository.UnitOfWork.SaveChangesAsync();
 
+            // TODO Publish message with a background service.
             await _mediator.Publish(new DomainEnvelope<IDomainEvent>(domainEvent));
         }
     }

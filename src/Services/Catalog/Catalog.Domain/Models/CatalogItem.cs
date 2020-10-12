@@ -33,6 +33,9 @@ namespace Catalog.Domain.Models
             ChangePrice(price);
             ChangeStock(stock);
             ChangeCatalogTypeId(catalogTypeId);
+
+            // TODO Add domain events (create, update)
+            //AddDomainEvent(new CatalogItemCreated());
         }
 
         /// <summary>
