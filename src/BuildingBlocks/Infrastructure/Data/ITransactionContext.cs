@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Data
@@ -11,8 +12,9 @@ namespace Infrastructure.Data
         /// <summary>
         /// Begins an asynchronous transaction.
         /// </summary>
+        /// <param name="isolationLevel">The isolation level.</param>
         /// <returns></returns>
-        Task BeginTransactionAsync();
+        Task BeginTransactionAsync(IsolationLevel isolationLevel);
 
         /// <summary>
         /// Commits an asynchronous transaction.

@@ -60,9 +60,9 @@ namespace Infrastructure.Data
             }
         }
 
-        public async Task BeginTransactionAsync()
+        public async Task BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
-            _currentTransaction ??= await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
+            _currentTransaction ??= await Database.BeginTransactionAsync(isolationLevel);
         }
 
         public async Task CommitTransactionAsync()
