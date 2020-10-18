@@ -56,7 +56,7 @@ namespace Infrastructure.Data
                 foreach (var domainEvent in domainEvents)
                     _domainEventDispatchers.Select(b => b.Dispatch(domainEvent));
 
-                rootAggregator.ClearUncommittedEvents();
+                rootAggregator.ClearDomainEvents();
             }
         }
 
