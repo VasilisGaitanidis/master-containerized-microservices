@@ -1,4 +1,5 @@
 ﻿using System;
+using MediatR;
 
 namespace Domain.Core.Messaging
 {
@@ -33,7 +34,7 @@ namespace Domain.Core.Messaging
     /// <summary>
     /// The domain event interface.
     /// </summary>
-    public interface IDomainEvent : IEvent
+    public interface IDomainEvent : IEvent, INotification
     {
     }
 
