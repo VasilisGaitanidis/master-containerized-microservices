@@ -9,9 +9,5 @@ namespace Domain.Core.Data
     /// <typeparam name="TId">The aggregate root identifier.</typeparam>
     public interface IRepository<TEntity, TId> where TEntity : class, IAggregateRoot<TId>
     {
-        /// <summary>
-        /// The unit of work.
-        /// </summary>
-        IUnitOfWork UnitOfWork { get; }
     }
 }

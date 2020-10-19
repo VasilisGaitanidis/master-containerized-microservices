@@ -30,7 +30,6 @@ namespace Catalog.Api.Application.Handlers
             catalogItem.ChangeCatalogTypeId(request.CatalogTypeId);
 
             _catalogItemRepository.Update(catalogItem);
-            await _catalogItemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             return true;
         }

@@ -1,12 +1,11 @@
 ﻿using Catalog.Domain.Models;
 using Catalog.Infrastructure.EntityConfigurations;
-using Domain.Core.Data;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure
 {
-    public class CatalogDataContext : AppDbContext, IUnitOfWork
+    public class CatalogDataContext : AppDbContext
     {
         /// <summary>
         /// The default database schema.

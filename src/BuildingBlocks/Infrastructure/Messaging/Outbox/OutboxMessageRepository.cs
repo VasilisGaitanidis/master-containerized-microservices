@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Domain.Core.Data;
 
 namespace Infrastructure.Messaging.Outbox
 {
     public class OutboxMessageRepository : IOutboxMessageRepository
     {
         private readonly MessagingDataContext _context;
-
-        public IUnitOfWork UnitOfWork => _context;
 
         public OutboxMessageRepository(MessagingDataContext context)
         {

@@ -27,8 +27,6 @@ namespace Catalog.Api.Application.Handlers
 
             await _catalogItemRepository.AddAsync(catalogItem);
 
-            await _catalogItemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
             return _mapper.Map<CatalogItemDto>(catalogItem);
         }
     }
