@@ -6,7 +6,7 @@ using Infrastructure.Data;
 using MediatR;
 using ReflectionMagic;
 
-namespace Infrastructure.EventBus.DomainEvents
+namespace Infrastructure.DomainEvents
 {
     public class DomainEventDispatcher : IDomainEventDispatcher
     {

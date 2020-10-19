@@ -7,7 +7,7 @@ using Domain.Core.Data;
 using FluentValidation;
 using Infrastructure.Behaviors;
 using Infrastructure.Data;
-using Infrastructure.EventBus.DomainEvents;
+using Infrastructure.DomainEvents;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

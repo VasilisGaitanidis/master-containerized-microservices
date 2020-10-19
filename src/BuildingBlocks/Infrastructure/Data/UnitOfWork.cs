@@ -2,7 +2,7 @@
 using System.Data;
 using System.Threading.Tasks;
 using Domain.Core.Data;
-using Infrastructure.EventBus.DomainEvents;
+using Infrastructure.DomainEvents;
 
 namespace Infrastructure.Data
 {

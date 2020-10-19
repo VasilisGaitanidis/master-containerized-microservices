@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Infrastructure.EventBus.DomainEvents
+namespace Infrastructure.DomainEvents
 {
     public interface IDomainEventDispatcher
     {
