@@ -39,13 +39,14 @@ namespace Infrastructure.Data
         {
             var entities = ChangeTracker
                 .Entries()
+                .Select(e => e.Entity)
                 .Where(e =>
                 {
                     var baseType = e.GetType().BaseType;
                     return baseType is { } && baseType.IsGenericType && baseType.GetGenericTypeDefinition()
-                            .IsAssignableFrom(typeof(AggregateRoot<>));
+                        .IsAssignableFrom(typeof(AggregateRoot<>));
                 })
-                .Where(e => e.AsDynamic().DomainEvents.Any())
+                .Where(e => e.AsDynamic().DomainEvents.Count > 0)
                 .ToArray();
 
             foreach (var entity in entities)
