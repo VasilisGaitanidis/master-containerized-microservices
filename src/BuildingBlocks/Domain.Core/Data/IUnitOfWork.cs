@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace Domain.Core.Data
@@ -9,8 +9,29 @@ namespace Domain.Core.Data
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
-        int SaveChanges();
+        /// <summary>
+        /// Begins an asynchronous transaction.
+        /// </summary>
+        /// <param name="isolationLevel">The isolation level.</param>
+        /// <returns></returns>
+        Task BeginTransactionAsync(IsolationLevel isolationLevel);
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Commits an asynchronous transaction.
+        /// </summary>
+        /// <returns></returns>
+        Task CommitTransactionAsync();
+
+        /// <summary>
+        /// Rollbacks a transaction.
+        /// </summary>
+        void RollbackTransaction();
+
+        /// <summary>
+        /// Creates an execution strategy.
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <returns></returns>
+        Task RetryOnExceptionAsync(Func<Task> operation);
     }
 }

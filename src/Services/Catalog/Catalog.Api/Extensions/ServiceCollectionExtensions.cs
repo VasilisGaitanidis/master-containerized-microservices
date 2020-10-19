@@ -3,9 +3,11 @@ using AutoMapper;
 using Catalog.Domain.Repositories;
 using Catalog.Infrastructure;
 using Catalog.Infrastructure.Repositories;
+using Domain.Core.Data;
 using FluentValidation;
 using Infrastructure.Behaviors;
 using Infrastructure.Data;
+using Infrastructure.EventBus.DomainEvents;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -88,6 +90,10 @@ namespace Catalog.Api.Extensions
             });
 
             services.AddScoped<AppDbContext>(provider => provider.GetService<CatalogDataContext>());
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
 
             return services;
         }

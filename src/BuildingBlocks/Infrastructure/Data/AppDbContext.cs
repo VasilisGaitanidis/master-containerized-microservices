@@ -1,67 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using Domain.Core.Models;
-using Infrastructure.EventBus.DomainEvents;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using ReflectionMagic;
 
 namespace Infrastructure.Data
 {
-    public abstract class AppDbContext : DbContext, ITransactionContext
+    public abstract class AppDbContext : DbContext
     {
         private IDbContextTransaction _currentTransaction;
-        private readonly IEnumerable<IDomainEventDispatcher> _domainEventDispatchers = null;
 
-        protected AppDbContext(DbContextOptions options, IEnumerable<IDomainEventDispatcher> domainEventDispatchers = null)
+        protected AppDbContext(DbContextOptions options)
             : base(options)
         {
-            _domainEventDispatchers = domainEventDispatchers;
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            DispatchDomainEvents();
-            return await base.SaveChangesAsync(cancellationToken);
-        }
-
-        public override int SaveChanges()
-        {
-            DispatchDomainEvents();
-            return base.SaveChanges();
-        }
-
-        private void DispatchDomainEvents()
-        {
-            var entities = ChangeTracker
-                .Entries()
-                .Select(e => e.Entity)
-                .Where(e =>
-                {
-                    var baseType = e.GetType().BaseType;
-                    return baseType is { } && baseType.IsGenericType && baseType.GetGenericTypeDefinition()
-                        .IsAssignableFrom(typeof(AggregateRoot<>));
-                })
-                .Where(e => e.AsDynamic().DomainEvents.Count > 0)
-                .ToArray();
-
-            foreach (var entity in entities)
-            {
-                var rootAggregator = entity.AsDynamic();
-                var domainEvents = rootAggregator.DomainEvents;
-
-                foreach (var domainEvent in domainEvents)
-                    _domainEventDispatchers.Select(b => b.Dispatch(domainEvent));
-
-                rootAggregator.ClearDomainEvents();
-            }
-        }
-
-        public async Task BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        public async Task BeginTransactionAsync(IsolationLevel isolationLevel)
         {
             _currentTransaction ??= await Database.BeginTransactionAsync(isolationLevel);
         }

@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
-using Infrastructure.Data;
+using Domain.Core.Data;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -11,12 +12,12 @@ namespace Infrastructure.Behaviors
         where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<TransactionBehavior<TRequest, TResponse>> _logger;
-        private readonly AppDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TransactionBehavior(ILogger<TransactionBehavior<TRequest, TResponse>> logger, AppDbContext dbContext)
+        public TransactionBehavior(ILogger<TransactionBehavior<TRequest, TResponse>> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
@@ -25,15 +26,15 @@ namespace Infrastructure.Behaviors
 
             try
             {
-                await _dbContext.RetryOnExceptionAsync(async () =>
+                await _unitOfWork.RetryOnExceptionAsync(async () =>
                 {
                     _logger.LogInformation($"Begin transaction {typeof(TRequest).Name}");
 
-                    await _dbContext.BeginTransactionAsync();
+                    await _unitOfWork.BeginTransactionAsync(IsolationLevel.ReadCommitted);
 
                     response = await next();
 
-                    await _dbContext.CommitTransactionAsync();
+                    await _unitOfWork.CommitTransactionAsync();
 
                     _logger.LogInformation($"Committed transaction {typeof(TRequest).Name}");
                 });
@@ -44,7 +45,7 @@ namespace Infrastructure.Behaviors
             {
                 _logger.LogInformation($"Rollback transaction executed {typeof(TRequest).Name}");
 
-                _dbContext.RollbackTransaction();
+                _unitOfWork.RollbackTransaction();
 
                 _logger.LogError(e.Message, e.StackTrace);
 
