@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Catalog.Api.Application.Dtos.Responses;
+using Catalog.Application.Dtos.Responses;
 using Catalog.Domain.Models;
 
-namespace Catalog.Api.Application.Helpers
+namespace Catalog.Application.Helpers
 {
     public class AutoMapperProfiles : Profile
     {

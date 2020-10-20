@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalog.Api.Application.Dtos.Requests
+namespace Catalog.Application.Dtos.Requests
 {
     public class UpdateCatalogItemDto
     {

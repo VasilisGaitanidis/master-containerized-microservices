@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalog.Api.Application.Commands;
+using Catalog.Application.Commands;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Api.Application.Handlers
+namespace Catalog.Application.Handlers
 {
     public class UpdateCatalogItemHandler : IRequestHandler<UpdateCatalogItemCommand, bool>
     {

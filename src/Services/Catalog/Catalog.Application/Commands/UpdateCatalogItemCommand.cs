@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Catalog.Api.Application.Commands
+namespace Catalog.Application.Commands
 {
     public class UpdateCatalogItemCommand : IRequest<bool>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalog.Api.Application.Dtos.Responses
+namespace Catalog.Application.Dtos.Responses
 {
     public class CatalogTypeDto
     {

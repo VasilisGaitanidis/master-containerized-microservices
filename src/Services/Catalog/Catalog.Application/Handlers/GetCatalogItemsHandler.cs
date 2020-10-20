@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalog.Api.Application.Dtos.Responses;
-using Catalog.Api.Application.Queries;
+using Catalog.Application.Dtos.Responses;
+using Catalog.Application.Queries;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Api.Application.Handlers
+namespace Catalog.Application.Handlers
 {
     public class GetCatalogItemsHandler : IRequestHandler<GetCatalogItemsQuery, IEnumerable<CatalogItemDto>>
     {

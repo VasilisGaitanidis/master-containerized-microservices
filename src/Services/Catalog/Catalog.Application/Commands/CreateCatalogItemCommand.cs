@@ -1,8 +1,8 @@
 ﻿using System;
-using Catalog.Api.Application.Dtos.Responses;
+using Catalog.Application.Dtos.Responses;
 using MediatR;
 
-namespace Catalog.Api.Application.Commands
+namespace Catalog.Application.Commands
 {
     public class CreateCatalogItemCommand : IRequest<CatalogItemDto>
     {

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Catalog.Api.Application.Commands;
-using Catalog.Api.Application.Dtos.Requests;
-using Catalog.Api.Application.Dtos.Responses;
-using Catalog.Api.Application.Queries;
+using Catalog.Application.Commands;
+using Catalog.Application.Dtos.Requests;
+using Catalog.Application.Dtos.Responses;
+using Catalog.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

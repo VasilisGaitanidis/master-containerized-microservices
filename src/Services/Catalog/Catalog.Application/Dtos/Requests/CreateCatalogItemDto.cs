@@ -1,11 +1,9 @@
 ﻿using System;
 
-namespace Catalog.Api.Application.Dtos.Responses
+namespace Catalog.Application.Dtos.Requests
 {
-    public class CatalogItemDto
+    public class CreateCatalogItemDto
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -14,6 +12,6 @@ namespace Catalog.Api.Application.Dtos.Responses
 
         public int Stock { get; set; }
 
-        public CatalogTypeDto CatalogType { get; set; }
+        public Guid CatalogTypeId { get; set; }
     }
 }

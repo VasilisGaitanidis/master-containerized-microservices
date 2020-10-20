@@ -1,4 +1,6 @@
 using Catalog.Api.Extensions;
+using Catalog.Application;
+using Catalog.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,14 +21,12 @@ namespace Catalog.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCustomControllers()
+            services
+                .AddCustomControllers()
+                .AddApplication()
+                .AddCatalogInfrastructure()
                 .AddCustomDbContext(Configuration)
-                .AddRepositories()
-                .AddSwagger(Configuration)
-                .AddMediatR()
-                .AddPipelineBehaviors()
-                .AddValidators()
-                .AddAutoMapper();
+                .AddSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

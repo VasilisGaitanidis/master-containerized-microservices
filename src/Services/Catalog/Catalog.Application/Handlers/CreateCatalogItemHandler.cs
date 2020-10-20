@@ -2,13 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalog.Api.Application.Commands;
-using Catalog.Api.Application.Dtos.Responses;
+using Catalog.Application.Commands;
+using Catalog.Application.Dtos.Responses;
 using Catalog.Domain.Models;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Api.Application.Handlers
+namespace Catalog.Application.Handlers
 {
     public class CreateCatalogItemHandler : IRequestHandler<CreateCatalogItemCommand, CatalogItemDto>
     {
