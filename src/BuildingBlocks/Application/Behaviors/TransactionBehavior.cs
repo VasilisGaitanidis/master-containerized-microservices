@@ -6,7 +6,7 @@ using Domain.Core.Data;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Infrastructure.Behaviors
+namespace Application.Behaviors
 {
     public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Application;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
@@ -8,9 +9,10 @@ namespace Catalog.Application
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddCatalogApplication(this IServiceCollection services)
         {
             services
+                .AddApplication()
                 .AddCqrsHandlers()
                 .AddValidators()
                 .AddMappings();
