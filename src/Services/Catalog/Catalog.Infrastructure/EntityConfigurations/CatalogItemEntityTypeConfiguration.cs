@@ -28,7 +28,7 @@ namespace Catalog.Infrastructure.EntityConfigurations
             builder.Property<decimal>("_price")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("Price")
-                .HasColumnType("decimal(18,4)")
+                .HasColumnType("decimal(18,2)")
                 .IsRequired();
 
             builder.Property<int>("_stock")
