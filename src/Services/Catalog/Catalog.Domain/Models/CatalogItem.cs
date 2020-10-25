@@ -1,4 +1,5 @@
 ﻿using System;
+using Catalog.Domain.Events;
 using Catalog.Domain.Exceptions;
 using Domain.Core.Models;
 
@@ -20,6 +21,9 @@ namespace Catalog.Domain.Models
         /// <summary>
         /// Initializes a new catalog item instance.
         /// </summary>
+        /// <remarks>
+        /// Add a <see cref="CatalogItemCreatedDomainEvent"/>.
+        /// </remarks>
         /// <param name="name">The catalog item name.</param>
         /// <param name="description">The catalog item description.</param>
         /// <param name="price">The catalog item price.</param>
@@ -28,11 +32,22 @@ namespace Catalog.Domain.Models
         public CatalogItem(string name, string description, decimal price, int stock, Guid catalogTypeId)
             : base(Guid.NewGuid())
         {
-            ChangeName(name);
-            ChangeDescription(description);
-            ChangePrice(price);
-            ChangeStock(stock);
-            ChangeCatalogTypeId(catalogTypeId);
+            if (string.IsNullOrWhiteSpace(name))
+                throw new CatalogDomainException("The catalog item name cannot be null, empty or whitespace.");
+
+            if (price < 0)
+                throw new CatalogDomainException("The catalog item price cannot have negative value.");
+
+            if (stock < 0)
+                throw new CatalogDomainException("The catalog item stock cannot have negative value.");
+
+            _name = name;
+            _description = description;
+            _price = price;
+            _stock = stock;
+            _catalogTypeId = catalogTypeId;
+
+            AddDomainEvent(new CatalogItemCreatedDomainEvent(name, description, price, stock, catalogTypeId));
         }
 
         /// <summary>
@@ -53,34 +68,47 @@ namespace Catalog.Domain.Models
         /// <param name="description">The description to be changed.</param>
         public void ChangeDescription(string description)
         {
-            if (string.IsNullOrWhiteSpace(description))
-                throw new CatalogDomainException("The catalog item description cannot be null, empty or whitespace.");
-
             _description = description;
         }
 
         /// <summary>
         /// Sets catalog item price.
         /// </summary>
+        /// <remarks>
+        /// Add a <see cref="CatalogItemPriceChangedDomainEvent"/>.
+        /// </remarks>
         /// <param name="price">The price to be changed.</param>
         public void ChangePrice(decimal price)
         {
             if (price < 0)
                 throw new CatalogDomainException("The catalog item price cannot have negative value.");
 
+            if (_price == price)
+                return;
+
             _price = price;
+
+            AddDomainEvent(new CatalogItemPriceChangedDomainEvent(price));
         }
 
         /// <summary>
         /// Sets catalog item stock.
         /// </summary>
+        /// <remarks>
+        /// Adds a <see cref="CatalogItemStockChangedDomainEvent"/>.
+        /// </remarks>
         /// <param name="stock">The stock to be changed.</param>
         public void ChangeStock(int stock)
         {
             if (stock < 0)
                 throw new CatalogDomainException("The catalog item stock cannot have negative value.");
 
+            if (_stock == stock)
+                return;
+
             _stock = stock;
+
+            AddDomainEvent(new CatalogItemStockChangedDomainEvent(stock));
         }
 
         /// <summary>

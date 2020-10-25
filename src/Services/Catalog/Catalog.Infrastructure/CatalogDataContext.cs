@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Data;
-using System.Threading.Tasks;
 using Catalog.Domain.Models;
 using Catalog.Infrastructure.EntityConfigurations;
-using Domain.Core.Data;
+using Infrastructure.Data;
+using Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace Catalog.Infrastructure
 {
-    public class CatalogDataContext : DbContext, IUnitOfWork, IDbContext
+    public class CatalogDataContext : AppDbContext
     {
         /// <summary>
         /// The default database schema.
         /// </summary>
         public const string DefaultSchema = "catalog";
-
-        private IDbContextTransaction _currentTransaction;
 
         public DbSet<CatalogItem> CatalogItems { get; set; }
 
@@ -30,47 +28,22 @@ namespace Catalog.Infrastructure
             modelBuilder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
         }
+    }
 
-        public async Task BeginTransactionAsync()
+    public class CatalogDataContextDesignFactory : IDesignTimeDbContextFactory<CatalogDataContext>
+    {
+        public CatalogDataContext CreateDbContext(string[] args)
         {
-            _currentTransaction ??= await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
-        }
+            var connectionString = ConfigurationHelper.GetConfiguration(AppContext.BaseDirectory).GetConnectionString("DefaultConnection");
 
-        public async Task CommitTransactionAsync()
-        {
-            try
-            {
-                await SaveChangesAsync();
-                await _currentTransaction.CommitAsync();
-            }
-            catch
-            {
-                RollbackTransaction();
-                throw;
-            }
-            finally
-            {
-                _currentTransaction?.Dispose();
-                _currentTransaction = null;
-            }
-        }
+            var optionsBuilder = new DbContextOptionsBuilder<CatalogDataContext>()
+                .UseSqlServer(connectionString,
+                    sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly(GetType().Assembly.FullName);
+                    });
 
-        public void RollbackTransaction()
-        {
-            try
-            {
-                _currentTransaction?.Rollback();
-            }
-            finally
-            {
-                _currentTransaction?.Dispose();
-                _currentTransaction = null;
-            }
-        }
-
-        public async Task RetryOnExceptionAsync(Func<Task> operation)
-        {
-            await Database.CreateExecutionStrategy().ExecuteAsync(operation);
+            return new CatalogDataContext(optionsBuilder.Options);
         }
     }
 }

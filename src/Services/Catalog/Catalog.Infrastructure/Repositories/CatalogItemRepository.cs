@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Catalog.Domain.Models;
 using Catalog.Domain.Repositories;
-using Domain.Core.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Repositories
@@ -12,8 +11,6 @@ namespace Catalog.Infrastructure.Repositories
     public class CatalogItemRepository : ICatalogItemRepository
     {
         private readonly CatalogDataContext _context;
-
-        public IUnitOfWork UnitOfWork => _context;
 
         public CatalogItemRepository(CatalogDataContext context)
         {

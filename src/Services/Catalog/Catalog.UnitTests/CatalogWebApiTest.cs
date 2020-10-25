@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Catalog.Api.Application.Dtos;
-using Catalog.Api.Application.Queries;
 using Catalog.Api.Controllers;
+using Catalog.Application.Commands;
+using Catalog.Application.Dtos.Requests;
+using Catalog.Application.Dtos.Responses;
+using Catalog.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -20,6 +23,26 @@ namespace Catalog.UnitTests
             _mediatorMock = new Mock<IMediator>();
         }
 
+        #region GetCatalogItemsAsync
+
+        [Fact]
+        public async Task Get_catalog_items_success()
+        {
+            // Arrange
+            var fakeDynamicResult = Enumerable.Empty<CatalogItemDto>();
+            _mediatorMock.Setup(x => x.Send(It.IsAny<GetCatalogItemsQuery>(), default))
+                .Returns(Task.FromResult(fakeDynamicResult));
+
+            // Act
+            var catalogController = new CatalogController(_mediatorMock.Object);
+            var actionResult = await catalogController.GetCatalogItemsAsync() as OkObjectResult;
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
+        }
+
+        #endregion
+
         #region GetCatalogItemAsync
 
         [Fact]
@@ -27,7 +50,7 @@ namespace Catalog.UnitTests
         {
             // Arrange
             var fakeCatalogItemId = Guid.Empty;
-            var fakeDynamicResult = new CatalogItemResponseDto();
+            var fakeDynamicResult = new CatalogItemDto();
             _mediatorMock.Setup(x => x.Send(It.IsAny<GetCatalogItemByIdQuery>(), default))
                 .Returns(Task.FromResult(fakeDynamicResult));
 
@@ -45,7 +68,7 @@ namespace Catalog.UnitTests
             // Arrange
             var fakeCatalogItemId = Guid.Empty;
             _mediatorMock.Setup(x => x.Send(It.IsAny<GetCatalogItemByIdQuery>(), default))
-                .Returns(Task.FromResult((CatalogItemResponseDto)null));
+                .Returns(Task.FromResult((CatalogItemDto)null));
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
@@ -53,6 +76,66 @@ namespace Catalog.UnitTests
 
             // Assert
             Assert.Equal((int)HttpStatusCode.NotFound, actionResult?.StatusCode);
+        }
+
+        #endregion
+
+        #region CreateCatalogItemAsync
+
+        [Fact]
+        public async Task Create_catalog_item_success()
+        {
+            // Arrange
+            var fakeDto = new CreateCatalogItemDto();
+            var fakeDynamicResult = new CatalogItemDto();
+            _mediatorMock.Setup(x => x.Send(It.IsAny<CreateCatalogItemCommand>(), default))
+                .Returns(Task.FromResult(fakeDynamicResult));
+
+            // Act
+            var catalogController = new CatalogController(_mediatorMock.Object);
+            var actionResult = await catalogController.CreateCatalogItemAsync(fakeDto) as CreatedAtRouteResult;
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.Created, actionResult?.StatusCode);
+            Assert.Equal("GetCatalogItem", actionResult?.RouteName);
+        }
+
+        #endregion
+
+        #region UpdateCatalogItemAsync
+
+        [Fact]
+        public async Task Update_catalog_item_success()
+        {
+            // Arrange
+            var fakeCatalogItemId = Guid.NewGuid();
+            var fakeDto = new UpdateCatalogItemDto();
+            _mediatorMock.Setup(x => x.Send(It.IsAny<UpdateCatalogItemCommand>(), default))
+                .Returns(Task.FromResult(true));
+
+            // Act
+            var catalogController = new CatalogController(_mediatorMock.Object);
+            var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as OkResult;
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
+        }
+
+        [Fact]
+        public async Task Update_catalog_item_bad_request()
+        {
+            // Arrange
+            var fakeCatalogItemId = Guid.NewGuid();
+            var fakeDto = new UpdateCatalogItemDto();
+            _mediatorMock.Setup(x => x.Send(It.IsAny<UpdateCatalogItemCommand>(), default))
+                .Returns(Task.FromResult(false));
+
+            // Act
+            var catalogController = new CatalogController(_mediatorMock.Object);
+            var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as BadRequestResult;
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.BadRequest, actionResult?.StatusCode);
         }
 
         #endregion
