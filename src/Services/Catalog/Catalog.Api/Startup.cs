@@ -25,7 +25,6 @@ namespace Catalog.Api
                 .AddCustomControllers()
                 .AddCatalogApplication()
                 .AddCatalogInfrastructure()
-                .AddCustomDbContext(Configuration)
                 .AddSwagger();
         }
 

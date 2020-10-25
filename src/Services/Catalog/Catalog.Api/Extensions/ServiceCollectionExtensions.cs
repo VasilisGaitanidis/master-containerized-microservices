@@ -1,9 +1,4 @@
-﻿using System.Reflection;
-using Catalog.Infrastructure;
-using Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace Catalog.Api.Extensions
@@ -29,23 +24,6 @@ namespace Catalog.Api.Extensions
                         Description = "The catalog microservice."
                     });
                 });
-        }
-
-        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<CatalogDataContext>(options =>
-            {
-                options.UseLazyLoadingProxies().
-                    UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                        sqlOptions =>
-                        {
-                            sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                        });
-            });
-
-            services.AddScoped<AppDbContext>(provider => provider.GetService<CatalogDataContext>());
-
-            return services;
         }
     }
 }
