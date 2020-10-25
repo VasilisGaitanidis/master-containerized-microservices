@@ -1,7 +1,11 @@
-﻿using Catalog.Domain.Models;
+﻿using System;
+using Catalog.Domain.Models;
 using Catalog.Infrastructure.EntityConfigurations;
 using Infrastructure.Data;
+using Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace Catalog.Infrastructure
 {
@@ -23,6 +27,23 @@ namespace Catalog.Infrastructure
         {
             modelBuilder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
+        }
+    }
+
+    public class CatalogDataContextDesignFactory : IDesignTimeDbContextFactory<CatalogDataContext>
+    {
+        public CatalogDataContext CreateDbContext(string[] args)
+        {
+            var connectionString = ConfigurationHelper.GetConfiguration(AppContext.BaseDirectory).GetConnectionString("DefaultConnection");
+
+            var optionsBuilder = new DbContextOptionsBuilder<CatalogDataContext>()
+                .UseSqlServer(connectionString,
+                    sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly(GetType().Assembly.FullName);
+                    });
+
+            return new CatalogDataContext(optionsBuilder.Options);
         }
     }
 }
