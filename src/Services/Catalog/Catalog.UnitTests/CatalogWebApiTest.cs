@@ -6,6 +6,7 @@ using Catalog.Api.Controllers;
 using Catalog.Application.Dtos.Requests;
 using Catalog.Application.Dtos.Responses;
 using Catalog.Application.UseCases.CreateCatalogItem;
+using Catalog.Application.UseCases.DeleteCatalogItem;
 using Catalog.Application.UseCases.GetCatalogItemById;
 using Catalog.Application.UseCases.GetCatalogItems;
 using Catalog.Application.UseCases.UpdateCatalogItem;
@@ -135,6 +136,42 @@ namespace Catalog.UnitTests
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
             var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as BadRequestResult;
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.BadRequest, actionResult?.StatusCode);
+        }
+
+        #endregion
+
+        #region DeleteCatalogItemAsync
+
+        [Fact]
+        public async Task Delete_catalog_item_success()
+        {
+            // Arrange
+            var fakeCatalogItemId = Guid.NewGuid();
+            _mediatorMock.Setup(x => x.Send(It.IsAny<DeleteCatalogItemCommand>(), default))
+                .Returns(Task.FromResult(true));
+
+            // Act
+            var catalogController = new CatalogController(_mediatorMock.Object);
+            var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId) as OkResult;
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
+        }
+
+        [Fact]
+        public async Task Delete_catalog_item_bad_request()
+        {
+            // Arrange
+            var fakeCatalogItemId = Guid.NewGuid();
+            _mediatorMock.Setup(x => x.Send(It.IsAny<DeleteCatalogItemCommand>(), default))
+                .Returns(Task.FromResult(false));
+
+            // Act
+            var catalogController = new CatalogController(_mediatorMock.Object);
+            var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId) as BadRequestResult;
 
             // Assert
             Assert.Equal((int)HttpStatusCode.BadRequest, actionResult?.StatusCode);

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Catalog.Application.Dtos.Requests;
 using Catalog.Application.Dtos.Responses;
 using Catalog.Application.UseCases.CreateCatalogItem;
+using Catalog.Application.UseCases.DeleteCatalogItem;
 using Catalog.Application.UseCases.GetCatalogItemById;
 using Catalog.Application.UseCases.GetCatalogItems;
 using Catalog.Application.UseCases.UpdateCatalogItem;
@@ -63,8 +64,16 @@ namespace Catalog.Api.Controllers
         }
 
         [HttpDelete("items/{id:Guid}")]
-        public void Delete(int id)
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> DeleteCatalogItemAsync(Guid id)
         {
+            var result = await _mediator.Send(new DeleteCatalogItemCommand(id));
+
+            if (!result)
+                return BadRequest();
+
+            return Ok();
         }
     }
 }
