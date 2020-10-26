@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Catalog.Application.Commands;
 using Catalog.Application.Dtos.Requests;
 using Catalog.Application.Dtos.Responses;
-using Catalog.Application.Queries;
+using Catalog.Application.UseCases.CreateCatalogItem;
+using Catalog.Application.UseCases.GetCatalogItemById;
+using Catalog.Application.UseCases.GetCatalogItems;
+using Catalog.Application.UseCases.UpdateCatalogItem;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

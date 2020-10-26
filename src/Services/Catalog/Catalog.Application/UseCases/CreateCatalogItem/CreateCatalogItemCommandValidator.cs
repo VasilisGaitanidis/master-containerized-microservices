@@ -1,7 +1,6 @@
-﻿using Catalog.Application.Commands;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Catalog.Application.Validations
+namespace Catalog.Application.UseCases.CreateCatalogItem
 {
     public class CreateCatalogItemCommandValidator : AbstractValidator<CreateCatalogItemCommand>
     {

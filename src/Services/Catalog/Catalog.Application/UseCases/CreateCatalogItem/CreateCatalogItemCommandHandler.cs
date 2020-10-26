@@ -2,20 +2,19 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalog.Application.Commands;
 using Catalog.Application.Dtos.Responses;
 using Catalog.Domain.Models;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.Handlers
+namespace Catalog.Application.UseCases.CreateCatalogItem
 {
-    public class CreateCatalogItemHandler : IRequestHandler<CreateCatalogItemCommand, CatalogItemDto>
+    public class CreateCatalogItemCommandHandler : IRequestHandler<CreateCatalogItemCommand, CatalogItemDto>
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
         private readonly IMapper _mapper;
 
-        public CreateCatalogItemHandler(ICatalogItemRepository catalogItemRepository, IMapper mapper)
+        public CreateCatalogItemCommandHandler(ICatalogItemRepository catalogItemRepository, IMapper mapper)
         {
             _catalogItemRepository = catalogItemRepository ?? throw new ArgumentNullException(nameof(catalogItemRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

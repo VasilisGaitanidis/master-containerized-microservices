@@ -2,7 +2,7 @@
 using Catalog.Application.Dtos.Responses;
 using MediatR;
 
-namespace Catalog.Application.Queries
+namespace Catalog.Application.UseCases.GetCatalogItemById
 {
     public class GetCatalogItemByIdQuery : IRequest<CatalogItemDto>
     {

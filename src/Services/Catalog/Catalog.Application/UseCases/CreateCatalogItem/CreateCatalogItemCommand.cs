@@ -2,7 +2,7 @@
 using Catalog.Application.Dtos.Responses;
 using MediatR;
 
-namespace Catalog.Application.Commands
+namespace Catalog.Application.UseCases.CreateCatalogItem
 {
     public class CreateCatalogItemCommand : IRequest<CatalogItemDto>
     {

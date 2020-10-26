@@ -4,18 +4,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.Application.Dtos.Responses;
-using Catalog.Application.Queries;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.Handlers
+namespace Catalog.Application.UseCases.GetCatalogItems
 {
-    public class GetCatalogItemsHandler : IRequestHandler<GetCatalogItemsQuery, IEnumerable<CatalogItemDto>>
+    public class GetCatalogItemsQueryHandler : IRequestHandler<GetCatalogItemsQuery, IEnumerable<CatalogItemDto>>
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
         private readonly IMapper _mapper;
 
-        public GetCatalogItemsHandler(ICatalogItemRepository catalogItemRepository, IMapper mapper)
+        public GetCatalogItemsQueryHandler(ICatalogItemRepository catalogItemRepository, IMapper mapper)
         {
             _catalogItemRepository = catalogItemRepository ?? throw new ArgumentNullException(nameof(catalogItemRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

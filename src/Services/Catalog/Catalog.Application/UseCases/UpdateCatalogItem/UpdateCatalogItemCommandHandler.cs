@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalog.Application.Commands;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.Handlers
+namespace Catalog.Application.UseCases.UpdateCatalogItem
 {
-    public class UpdateCatalogItemHandler : IRequestHandler<UpdateCatalogItemCommand, bool>
+    public class UpdateCatalogItemCommandHandler : IRequestHandler<UpdateCatalogItemCommand, bool>
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
 
-        public UpdateCatalogItemHandler(ICatalogItemRepository catalogItemRepository)
+        public UpdateCatalogItemCommandHandler(ICatalogItemRepository catalogItemRepository)
         {
             _catalogItemRepository = catalogItemRepository ?? throw new ArgumentNullException(nameof(catalogItemRepository));
         }
