@@ -65,7 +65,6 @@ namespace Catalog.UnitTests
             Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
         }
 
-
         #endregion
 
         #region CreateCatalogItemAsync
@@ -109,7 +108,6 @@ namespace Catalog.UnitTests
             Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
         }
 
-
         #endregion
 
         #region DeleteCatalogItemAsync
@@ -129,7 +127,6 @@ namespace Catalog.UnitTests
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
         }
-
 
         #endregion
     }
