@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Domain.Core.Messaging
+namespace Domain.Messaging
 {
     /// <summary>
     /// The event interface.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Core.Models
+namespace Domain.Models
 {
     /// <summary>
     /// Super type for all Identity types with generic Id.

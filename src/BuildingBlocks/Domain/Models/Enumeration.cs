@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Core.Models
+namespace Domain.Models
 {
     /// <summary>
     /// Enumeration class based on https://lostechies.com/jimmybogard/2008/08/12/enumeration-classes/

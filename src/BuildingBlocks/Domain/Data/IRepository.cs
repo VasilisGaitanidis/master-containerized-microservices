@@ -1,6 +1,6 @@
-﻿using Domain.Core.Models;
+﻿using Domain.Models;
 
-namespace Domain.Core.Data
+namespace Domain.Data
 {
     /// <summary>
     /// The <typeparamref name="TEntity"/> repository pattern.

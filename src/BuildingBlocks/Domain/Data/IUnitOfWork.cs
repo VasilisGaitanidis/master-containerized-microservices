@@ -2,7 +2,7 @@
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Domain.Core.Data
+namespace Domain.Data
 {
     /// <summary>
     /// The unit of work pattern.

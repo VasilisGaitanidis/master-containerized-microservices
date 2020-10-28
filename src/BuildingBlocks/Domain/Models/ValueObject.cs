@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Domain.Core.Models
+namespace Domain.Models
 {
     public abstract class ValueObject : IEquatable<ValueObject>
     {

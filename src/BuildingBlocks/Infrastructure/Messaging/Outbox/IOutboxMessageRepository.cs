@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Domain.Core.Data;
+using Domain.Data;
 
 namespace Infrastructure.Messaging.Outbox
 {

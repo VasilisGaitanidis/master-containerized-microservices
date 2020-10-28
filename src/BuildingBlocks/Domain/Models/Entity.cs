@@ -1,4 +1,4 @@
-﻿namespace Domain.Core.Models
+﻿namespace Domain.Models
 {
     public interface IEntity<out TId> : IIdentity<TId>
     {

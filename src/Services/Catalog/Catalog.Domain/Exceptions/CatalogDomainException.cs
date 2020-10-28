@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Core.Exceptions;
+using Domain.Exceptions;
 
 namespace Catalog.Domain.Exceptions
 {

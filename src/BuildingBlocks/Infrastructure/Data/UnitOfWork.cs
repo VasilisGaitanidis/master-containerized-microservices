@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Threading.Tasks;
-using Domain.Core.Data;
+using Domain.Data;
 using Infrastructure.DomainEvents;
 
 namespace Infrastructure.Data

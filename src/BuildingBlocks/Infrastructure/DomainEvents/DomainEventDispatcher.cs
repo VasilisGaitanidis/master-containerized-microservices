@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.Core.Models;
+using Domain.Models;
 using Infrastructure.Data;
 using MediatR;
 using ReflectionMagic;

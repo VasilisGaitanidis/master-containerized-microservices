@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Domain.Core.Messaging;
+using Domain.Messaging;
 
-namespace Domain.Core.Models
+namespace Domain.Models
 {
     /// <summary>
     /// The aggregate root interface.
