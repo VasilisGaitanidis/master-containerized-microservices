@@ -27,7 +27,6 @@ namespace Catalog.Api.Controllers
 
         [HttpGet("items")]
         [ProducesResponseType(typeof(IEnumerable<CatalogItemDto>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemsAsync()
             => Ok(await _mediator.Send(new GetCatalogItemsQuery()));
 
@@ -35,11 +34,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(CatalogItemDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetCatalogItemAsync(Guid id)
-        {
-            var result = await _mediator.Send(new GetCatalogItemByIdQuery(id));
-
-            return result == null ? NotFound() : (IActionResult)Ok(result);
-        }
+           => Ok(await _mediator.Send(new GetCatalogItemByIdQuery(id)));
 
         [HttpPost("items")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
@@ -53,27 +48,14 @@ namespace Catalog.Api.Controllers
         [HttpPut("items/{id:Guid}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> UpdateCatalogItemAsync(Guid id, [FromBody] UpdateCatalogItemDto dto)
-        {
-            var result = await _mediator.Send(new UpdateCatalogItemCommand(id, dto.Name, dto.Description, dto.Price, dto.Stock, dto.CatalogTypeId));
-
-            if (!result)
-                return BadRequest();
-
-            return Ok();
-        }
+            => Ok(await _mediator.Send(new UpdateCatalogItemCommand(id, dto.Name, dto.Description, dto.Price, dto.Stock, dto.CatalogTypeId)));
 
         [HttpDelete("items/{id:Guid}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> DeleteCatalogItemAsync(Guid id)
-        {
-            var result = await _mediator.Send(new DeleteCatalogItemCommand(id));
-
-            if (!result)
-                return BadRequest();
-
-            return Ok();
-        }
+            => Ok(await _mediator.Send(new DeleteCatalogItemCommand(id)));
     }
 }

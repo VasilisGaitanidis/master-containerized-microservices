@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Catalog.Application.UseCases.DeleteCatalogItem
 {
-    public class DeleteCatalogItemCommandHandler : IRequestHandler<DeleteCatalogItemCommand, bool>
+    public class DeleteCatalogItemCommandHandler : IRequestHandler<DeleteCatalogItemCommand, Unit>
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
 
@@ -16,7 +16,7 @@ namespace Catalog.Application.UseCases.DeleteCatalogItem
             _catalogItemRepository = catalogItemRepository ?? throw new ArgumentNullException(nameof(catalogItemRepository));
         }
 
-        public async Task<bool> Handle(DeleteCatalogItemCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteCatalogItemCommand request, CancellationToken cancellationToken)
         {
             var catalogItem = await _catalogItemRepository.GetCatalogItemAsync(request.Id);
 
@@ -25,7 +25,7 @@ namespace Catalog.Application.UseCases.DeleteCatalogItem
 
             _catalogItemRepository.Delete(catalogItem);
 
-            return true;
+            return Unit.Value;
         }
     }
 }

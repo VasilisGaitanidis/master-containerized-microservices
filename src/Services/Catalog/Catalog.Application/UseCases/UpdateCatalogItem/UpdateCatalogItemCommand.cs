@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Catalog.Application.UseCases.UpdateCatalogItem
 {
-    public class UpdateCatalogItemCommand : IRequest<bool>
+    public class UpdateCatalogItemCommand : IRequest<Unit>
     {
         public Guid Id { get; }
 

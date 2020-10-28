@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Catalog.Application.UseCases.UpdateCatalogItem
 {
-    public class UpdateCatalogItemCommandHandler : IRequestHandler<UpdateCatalogItemCommand, bool>
+    public class UpdateCatalogItemCommandHandler : IRequestHandler<UpdateCatalogItemCommand, Unit>
     {
         private readonly ICatalogItemRepository _catalogItemRepository;
 
@@ -16,7 +16,7 @@ namespace Catalog.Application.UseCases.UpdateCatalogItem
             _catalogItemRepository = catalogItemRepository ?? throw new ArgumentNullException(nameof(catalogItemRepository));
         }
 
-        public async Task<bool> Handle(UpdateCatalogItemCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateCatalogItemCommand request, CancellationToken cancellationToken)
         {
             var catalogItem = await _catalogItemRepository.GetCatalogItemAsync(request.Id);
 
@@ -31,7 +31,7 @@ namespace Catalog.Application.UseCases.UpdateCatalogItem
 
             _catalogItemRepository.Update(catalogItem);
 
-            return true;
+            return Unit.Value;
         }
     }
 }

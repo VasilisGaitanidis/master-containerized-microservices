@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Catalog.Application.UseCases.DeleteCatalogItem
 {
-    public class DeleteCatalogItemCommand : IRequest<bool>
+    public class DeleteCatalogItemCommand : IRequest<Unit>
     {
         public Guid Id { get; }
 

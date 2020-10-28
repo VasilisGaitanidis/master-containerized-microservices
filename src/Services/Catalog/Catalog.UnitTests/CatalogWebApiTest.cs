@@ -65,21 +65,6 @@ namespace Catalog.UnitTests
             Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
         }
 
-        [Fact]
-        public async Task Get_catalog_item_not_found()
-        {
-            // Arrange
-            var fakeCatalogItemId = Guid.Empty;
-            _mediatorMock.Setup(x => x.Send(It.IsAny<GetCatalogItemByIdQuery>(), default))
-                .Returns(Task.FromResult((CatalogItemDto)null));
-
-            // Act
-            var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.GetCatalogItemAsync(fakeCatalogItemId) as NotFoundResult;
-
-            // Assert
-            Assert.Equal((int)HttpStatusCode.NotFound, actionResult?.StatusCode);
-        }
 
         #endregion
 
@@ -114,32 +99,16 @@ namespace Catalog.UnitTests
             var fakeCatalogItemId = Guid.NewGuid();
             var fakeDto = new UpdateCatalogItemDto();
             _mediatorMock.Setup(x => x.Send(It.IsAny<UpdateCatalogItemCommand>(), default))
-                .Returns(Task.FromResult(true));
+                .Returns(Task.FromResult(Unit.Value));
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as OkResult;
+            var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as OkObjectResult;
 
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
         }
 
-        [Fact]
-        public async Task Update_catalog_item_bad_request()
-        {
-            // Arrange
-            var fakeCatalogItemId = Guid.NewGuid();
-            var fakeDto = new UpdateCatalogItemDto();
-            _mediatorMock.Setup(x => x.Send(It.IsAny<UpdateCatalogItemCommand>(), default))
-                .Returns(Task.FromResult(false));
-
-            // Act
-            var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as BadRequestResult;
-
-            // Assert
-            Assert.Equal((int)HttpStatusCode.BadRequest, actionResult?.StatusCode);
-        }
 
         #endregion
 
@@ -151,31 +120,16 @@ namespace Catalog.UnitTests
             // Arrange
             var fakeCatalogItemId = Guid.NewGuid();
             _mediatorMock.Setup(x => x.Send(It.IsAny<DeleteCatalogItemCommand>(), default))
-                .Returns(Task.FromResult(true));
+                .Returns(Task.FromResult(Unit.Value));
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId) as OkResult;
+            var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId) as OkObjectResult;
 
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
         }
 
-        [Fact]
-        public async Task Delete_catalog_item_bad_request()
-        {
-            // Arrange
-            var fakeCatalogItemId = Guid.NewGuid();
-            _mediatorMock.Setup(x => x.Send(It.IsAny<DeleteCatalogItemCommand>(), default))
-                .Returns(Task.FromResult(false));
-
-            // Act
-            var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId) as BadRequestResult;
-
-            // Assert
-            Assert.Equal((int)HttpStatusCode.BadRequest, actionResult?.StatusCode);
-        }
 
         #endregion
     }
