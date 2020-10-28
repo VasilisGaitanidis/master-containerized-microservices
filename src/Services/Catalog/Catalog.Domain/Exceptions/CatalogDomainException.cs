@@ -1,13 +1,11 @@
 ﻿using System;
-using Domain.Core.Exceptions;
+using Domain.Exceptions;
 
 namespace Catalog.Domain.Exceptions
 {
     /// <inheritdoc />
     public class CatalogDomainException : DomainException
     {
-        public CatalogDomainException() { }
-
         public CatalogDomainException(string message)
             : base(message) { }
 

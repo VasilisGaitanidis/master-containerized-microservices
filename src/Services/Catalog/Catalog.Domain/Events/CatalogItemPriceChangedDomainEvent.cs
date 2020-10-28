@@ -1,4 +1,4 @@
-﻿using Domain.Core.Messaging;
+﻿using Domain.Messaging;
 
 namespace Catalog.Domain.Events
 {

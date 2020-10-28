@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Catalog.Api.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace Catalog.Api.Extensions
@@ -7,7 +8,11 @@ namespace Catalog.Api.Extensions
     {
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(
+                options =>
+                {
+                    options.Filters.Add<HttpGlobalExceptionFilter>();
+                });
 
             return services;
         }

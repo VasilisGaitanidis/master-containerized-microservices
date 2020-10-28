@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Catalog.Domain.Models;
-using Domain.Core.Data;
+using Domain.Data;
 
 namespace Catalog.Domain.Repositories
 {

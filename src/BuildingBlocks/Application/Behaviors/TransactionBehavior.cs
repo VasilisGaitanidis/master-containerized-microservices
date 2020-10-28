@@ -2,7 +2,7 @@
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain.Core.Data;
+using Domain.Data;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

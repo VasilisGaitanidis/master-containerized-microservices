@@ -37,8 +37,7 @@ namespace Application.Behaviors
             {
                 _logger.LogWarning($"Validation errors on {typeof(TRequest).Name} - Errors: {failures}");
 
-                throw new InvalidCommandException(
-                    $"Command validation errors for type {typeof(TRequest).Name}", new ValidationException(failures));
+                throw new ValidationAppException($"Command validation errors for type {typeof(TRequest).Name}", new ValidationException(failures));
             }
 
             return await next();

@@ -1,10 +1,12 @@
 ﻿using System;
-using Domain.Messaging;
+using MediatR;
 
-namespace Catalog.Domain.Events
+namespace Catalog.Application.UseCases.UpdateCatalogItem
 {
-    public class CatalogItemCreatedDomainEvent : DomainEvent
+    public class UpdateCatalogItemCommand : IRequest<Unit>
     {
+        public Guid Id { get; }
+
         public string Name { get; }
 
         public string Description { get; }
@@ -15,8 +17,9 @@ namespace Catalog.Domain.Events
 
         public Guid CatalogTypeId { get; }
 
-        public CatalogItemCreatedDomainEvent(string name, string description, decimal price, int stock, Guid catalogTypeId)
+        public UpdateCatalogItemCommand(Guid id, string name, string description, decimal price, int stock, Guid catalogTypeId)
         {
+            Id = id;
             Name = name;
             Description = description;
             Price = price;

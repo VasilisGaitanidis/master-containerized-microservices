@@ -1,7 +1,7 @@
 ﻿using System;
 using Catalog.Domain.Events;
 using Catalog.Domain.Exceptions;
-using Domain.Core.Models;
+using Domain.Models;
 
 namespace Catalog.Domain.Models
 {

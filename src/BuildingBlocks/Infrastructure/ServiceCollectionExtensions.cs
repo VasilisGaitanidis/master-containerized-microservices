@@ -1,4 +1,4 @@
-﻿using Domain.Core.Data;
+﻿using Domain.Data;
 using Infrastructure.Data;
 using Infrastructure.DomainEvents;
 using Microsoft.Extensions.DependencyInjection;

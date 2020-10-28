@@ -1,9 +1,10 @@
 ﻿using System;
-using Domain.Messaging;
+using Catalog.Application.Dtos.Responses;
+using MediatR;
 
-namespace Catalog.Domain.Events
+namespace Catalog.Application.UseCases.CreateCatalogItem
 {
-    public class CatalogItemCreatedDomainEvent : DomainEvent
+    public class CreateCatalogItemCommand : IRequest<CatalogItemDto>
     {
         public string Name { get; }
 
@@ -15,7 +16,7 @@ namespace Catalog.Domain.Events
 
         public Guid CatalogTypeId { get; }
 
-        public CatalogItemCreatedDomainEvent(string name, string description, decimal price, int stock, Guid catalogTypeId)
+        public CreateCatalogItemCommand(string name, string description, decimal price, int stock, Guid catalogTypeId)
         {
             Name = name;
             Description = description;

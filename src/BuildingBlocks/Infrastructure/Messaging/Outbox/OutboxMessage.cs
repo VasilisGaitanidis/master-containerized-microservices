@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Core.Models;
+using Domain.Models;
 
 namespace Infrastructure.Messaging.Outbox
 {
