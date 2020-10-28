@@ -40,7 +40,8 @@ namespace Catalog.Api.Filters
                 {
                     Instance = context.HttpContext.Request.Path,
                     Status = StatusCodes.Status400BadRequest,
-                    Detail = "Please refer to the errors property for additional details."
+                    Title = "A validation error occurred.",
+                    Detail = "A validation error occurred. Please refer to the errors property for additional details."
                 };
 
                 problemDetails.Errors.Add("DomainValidationErrors", new[] { context.Exception.Message });
