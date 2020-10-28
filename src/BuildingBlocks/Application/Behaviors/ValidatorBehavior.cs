@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain.Exceptions;
+using Application.Exceptions;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -37,7 +37,7 @@ namespace Application.Behaviors
             {
                 _logger.LogWarning($"Validation errors on {typeof(TRequest).Name} - Errors: {failures}");
 
-                throw new DomainException($"Command validation errors for type {typeof(TRequest).Name}", new ValidationException(failures));
+                throw new ValidationAppException($"Command validation errors for type {typeof(TRequest).Name}", new ValidationException(failures));
             }
 
             return await next();

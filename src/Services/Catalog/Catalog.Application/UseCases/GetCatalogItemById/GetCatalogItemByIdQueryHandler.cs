@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.Application.Dtos.Responses;
+using Catalog.Application.Exceptions;
 using Catalog.Domain.Repositories;
 using MediatR;
 
@@ -22,6 +23,9 @@ namespace Catalog.Application.UseCases.GetCatalogItemById
         public async Task<CatalogItemDto> Handle(GetCatalogItemByIdQuery request, CancellationToken cancellationToken)
         {
             var catalogItem = await _catalogItemRepository.GetCatalogItemAsync(request.Id);
+
+            if (catalogItem == null)
+                throw new CatalogItemNotFoundException(request.Id);
 
             return _mapper.Map<CatalogItemDto>(catalogItem);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.Application.Exceptions;
 using Catalog.Domain.Repositories;
 using MediatR;
 
@@ -20,7 +21,7 @@ namespace Catalog.Application.UseCases.DeleteCatalogItem
             var catalogItem = await _catalogItemRepository.GetCatalogItemAsync(request.Id);
 
             if (catalogItem == null)
-                return false;
+                throw new CatalogItemNotFoundException(request.Id);
 
             _catalogItemRepository.Delete(catalogItem);
 
