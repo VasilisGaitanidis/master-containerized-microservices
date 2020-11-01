@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using Application.Exceptions;
 using Catalog.Domain.Exceptions;
 using FluentValidation;
@@ -48,7 +47,7 @@ namespace Catalog.Api.Filters
                 problemDetails.Errors.Add("DomainErrors", new[] { domainException.Message });
                 
                 context.Result = new BadRequestObjectResult(problemDetails);
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             }
             else if (context.Exception is ValidationAppException validationAppException)
             {
@@ -68,7 +67,7 @@ namespace Catalog.Api.Filters
                 }
 
                 context.Result = new BadRequestObjectResult(problemDetails);
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             }
             else if (context.Exception is EntityNotFoundException entityNotFoundException)
             {
@@ -80,11 +79,11 @@ namespace Catalog.Api.Filters
                 };
 
                 context.Result = new NotFoundObjectResult(problemDetails);
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
             }
             else
             {
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
 
             context.ExceptionHandled = true;

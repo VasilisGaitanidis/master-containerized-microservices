@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Catalog.Api.Controllers;
 using Catalog.Application.Dtos.Requests;
@@ -11,11 +10,12 @@ using Catalog.Application.UseCases.GetCatalogItemById;
 using Catalog.Application.UseCases.GetCatalogItems;
 using Catalog.Application.UseCases.UpdateCatalogItem;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
-namespace Catalog.UnitTests
+namespace Catalog.UnitTests.Api
 {
     public class CatalogWebApiTest
     {
@@ -41,7 +41,7 @@ namespace Catalog.UnitTests
             var actionResult = await catalogController.GetCatalogItemsAsync() as OkObjectResult;
 
             // Assert
-            Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
+            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace Catalog.UnitTests
             var actionResult = await catalogController.GetCatalogItemAsync(fakeCatalogItemId) as OkObjectResult;
 
             // Assert
-            Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
+            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
         }
 
         #endregion
@@ -83,7 +83,7 @@ namespace Catalog.UnitTests
             var actionResult = await catalogController.CreateCatalogItemAsync(fakeDto) as CreatedAtRouteResult;
 
             // Assert
-            Assert.Equal((int)HttpStatusCode.Created, actionResult?.StatusCode);
+            Assert.Equal(StatusCodes.Status201Created, actionResult?.StatusCode);
             Assert.Equal("GetCatalogItem", actionResult?.RouteName);
         }
 
@@ -105,7 +105,7 @@ namespace Catalog.UnitTests
             var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as OkObjectResult;
 
             // Assert
-            Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
+            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
         }
 
         #endregion
@@ -125,7 +125,7 @@ namespace Catalog.UnitTests
             var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId) as OkObjectResult;
 
             // Assert
-            Assert.Equal((int)HttpStatusCode.OK, actionResult?.StatusCode);
+            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
         }
 
         #endregion
