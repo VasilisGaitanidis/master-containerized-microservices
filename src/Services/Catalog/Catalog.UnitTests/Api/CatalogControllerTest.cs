@@ -17,11 +17,11 @@ using Xunit;
 
 namespace Catalog.UnitTests.Api
 {
-    public class CatalogWebApiTest
+    public class CatalogControllerTest
     {
         private readonly Mock<IMediator> _mediatorMock;
 
-        public CatalogWebApiTest()
+        public CatalogControllerTest()
         {
             _mediatorMock = new Mock<IMediator>();
         }
@@ -38,10 +38,11 @@ namespace Catalog.UnitTests.Api
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.GetCatalogItemsAsync() as OkObjectResult;
+            var actionResult = await catalogController.GetCatalogItemsAsync();
 
             // Assert
-            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
+            Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult).StatusCode);
         }
 
         #endregion
@@ -59,10 +60,11 @@ namespace Catalog.UnitTests.Api
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.GetCatalogItemAsync(fakeCatalogItemId) as OkObjectResult;
+            var actionResult = await catalogController.GetCatalogItemAsync(fakeCatalogItemId);
 
             // Assert
-            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
+            Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult).StatusCode);
         }
 
         #endregion
@@ -80,11 +82,12 @@ namespace Catalog.UnitTests.Api
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.CreateCatalogItemAsync(fakeDto) as CreatedAtRouteResult;
+            var actionResult = await catalogController.CreateCatalogItemAsync(fakeDto);
 
             // Assert
-            Assert.Equal(StatusCodes.Status201Created, actionResult?.StatusCode);
-            Assert.Equal("GetCatalogItem", actionResult?.RouteName);
+            Assert.IsType<CreatedAtRouteResult>(actionResult);
+            Assert.Equal(StatusCodes.Status201Created, ((CreatedAtRouteResult)actionResult).StatusCode);
+            Assert.Equal("GetCatalogItem", ((CreatedAtRouteResult)actionResult).RouteName);
         }
 
         #endregion
@@ -102,10 +105,11 @@ namespace Catalog.UnitTests.Api
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto) as OkObjectResult;
+            var actionResult = await catalogController.UpdateCatalogItemAsync(fakeCatalogItemId, fakeDto);
 
             // Assert
-            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
+            Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult).StatusCode);
         }
 
         #endregion
@@ -122,10 +126,11 @@ namespace Catalog.UnitTests.Api
 
             // Act
             var catalogController = new CatalogController(_mediatorMock.Object);
-            var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId) as OkObjectResult;
+            var actionResult = await catalogController.DeleteCatalogItemAsync(fakeCatalogItemId);
 
             // Assert
-            Assert.Equal(StatusCodes.Status200OK, actionResult?.StatusCode);
+            Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult).StatusCode);
         }
 
         #endregion
