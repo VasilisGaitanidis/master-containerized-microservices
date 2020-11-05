@@ -5,8 +5,13 @@ services:
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: always
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
+    container_name: catalogapi
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.Api/Dockerfile
@@ -15,6 +20,7 @@ services:
 
   ordering.api:
     image: ${DOCKER_REGISTRY-}orderingapi
+    container_name: orderingapi
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.Api/Dockerfile

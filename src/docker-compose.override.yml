@@ -10,6 +10,11 @@ services:
     volumes:
       - sqlserver-data:/var/opt/mssql
 
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
