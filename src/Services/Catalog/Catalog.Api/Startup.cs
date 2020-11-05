@@ -25,7 +25,8 @@ namespace Catalog.Api
                 .AddCustomControllers()
                 .AddCatalogApplication()
                 .AddCatalogInfrastructure()
-                .AddSwagger();
+                .AddSwagger()
+                .AddMassTransit(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,8 @@
-﻿using Catalog.Api.Filters;
+﻿using Catalog.Api.Configuration;
+using Catalog.Api.Filters;
+using Infrastructure;
+using MassTransit;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -29,6 +33,24 @@ namespace Catalog.Api.Extensions
                         Description = "The catalog microservice."
                     });
                 });
+        }
+
+        public static IServiceCollection AddMassTransit(this IServiceCollection services, IConfiguration configuration)
+        {
+            var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMq");
+
+            return services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((context, configurator) =>
+                {
+                    configurator.UseHealthCheck(context);
+                    configurator.Host(rabbitMqOptions.Host, rabbitMqOptions.VirtualHost, h =>
+                    {
+                        h.Username(rabbitMqOptions.Username);
+                        h.Password(rabbitMqOptions.Password);
+                    });
+                });
+            }).AddMassTransitHostedService();
         }
     }
 }
