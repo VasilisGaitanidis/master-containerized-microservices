@@ -1,11 +1,12 @@
 ﻿using System;
-using Catalog.Application.Dtos.Responses;
 using MediatR;
 
-namespace Catalog.Application.UseCases.CreateCatalogItem
+namespace Catalog.Application.UseCases.Commands.UpdateCatalogItem
 {
-    public class CreateCatalogItemCommand : IRequest<CatalogItemDto>
+    public class UpdateCatalogItemCommand : IRequest<Unit>
     {
+        public Guid Id { get; }
+
         public string Name { get; }
 
         public string Description { get; }
@@ -16,8 +17,9 @@ namespace Catalog.Application.UseCases.CreateCatalogItem
 
         public Guid CatalogTypeId { get; }
 
-        public CreateCatalogItemCommand(string name, string description, decimal price, int stock, Guid catalogTypeId)
+        public UpdateCatalogItemCommand(Guid id, string name, string description, decimal price, int stock, Guid catalogTypeId)
         {
+            Id = id;
             Name = name;
             Description = description;
             Price = price;

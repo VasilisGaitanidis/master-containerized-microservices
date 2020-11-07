@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Catalog.Domain.Events;
 using MediatR;
 
-namespace Catalog.Application.UseCases.CreateCatalogItem
+namespace Catalog.Application.UseCases.Events.CatalogItemCreated
 {
-    public class CatalogItemCreatedDomainEventHandler /*: INotificationHandler<CatalogItemCreatedDomainEvent>*/
+    public class CatalogItemCreatedDomainEventHandler : INotificationHandler<CatalogItemCreatedDomainEvent>
     {
         public Task Handle(CatalogItemCreatedDomainEvent notification, CancellationToken cancellationToken)
         {

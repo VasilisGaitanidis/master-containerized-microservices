@@ -5,7 +5,7 @@ using Catalog.Application.Exceptions;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.UseCases.UpdateCatalogItem
+namespace Catalog.Application.UseCases.Commands.UpdateCatalogItem
 {
     public class UpdateCatalogItemCommandHandler : IRequestHandler<UpdateCatalogItemCommand, Unit>
     {

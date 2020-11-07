@@ -5,7 +5,7 @@ using Catalog.Application.Exceptions;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.UseCases.DeleteCatalogItem
+namespace Catalog.Application.UseCases.Commands.DeleteCatalogItem
 {
     public class DeleteCatalogItemCommandHandler : IRequestHandler<DeleteCatalogItemCommand, Unit>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Catalog.Application.UseCases.DeleteCatalogItem
+namespace Catalog.Application.UseCases.Commands.DeleteCatalogItem
 {
     public class DeleteCatalogItemCommand : IRequest<Unit>
     {

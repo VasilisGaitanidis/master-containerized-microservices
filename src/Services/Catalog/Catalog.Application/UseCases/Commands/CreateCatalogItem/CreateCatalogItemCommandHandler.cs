@@ -7,7 +7,7 @@ using Catalog.Domain.Models;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.UseCases.CreateCatalogItem
+namespace Catalog.Application.UseCases.Commands.CreateCatalogItem
 {
     public class CreateCatalogItemCommandHandler : IRequestHandler<CreateCatalogItemCommand, CatalogItemDto>
     {

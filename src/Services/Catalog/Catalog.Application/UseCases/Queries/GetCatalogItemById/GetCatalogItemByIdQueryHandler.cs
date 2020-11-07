@@ -7,7 +7,7 @@ using Catalog.Application.Exceptions;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.UseCases.GetCatalogItemById
+namespace Catalog.Application.UseCases.Queries.GetCatalogItemById
 {
     public class GetCatalogItemByIdQueryHandler : IRequestHandler<GetCatalogItemByIdQuery, CatalogItemDto>
     {

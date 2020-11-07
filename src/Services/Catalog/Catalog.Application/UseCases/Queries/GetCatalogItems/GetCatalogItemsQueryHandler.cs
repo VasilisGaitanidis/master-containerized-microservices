@@ -7,7 +7,7 @@ using Catalog.Application.Dtos.Responses;
 using Catalog.Domain.Repositories;
 using MediatR;
 
-namespace Catalog.Application.UseCases.GetCatalogItems
+namespace Catalog.Application.UseCases.Queries.GetCatalogItems
 {
     public class GetCatalogItemsQueryHandler : IRequestHandler<GetCatalogItemsQuery, IEnumerable<CatalogItemDto>>
     {

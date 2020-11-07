@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Catalog.Application.UseCases.UpdateCatalogItem
+namespace Catalog.Application.UseCases.Commands.UpdateCatalogItem
 {
     public class UpdateCatalogItemCommandValidator : AbstractValidator<UpdateCatalogItemCommand>
     {
