@@ -41,6 +41,8 @@ namespace Catalog.Api.Extensions
 
             return services.AddMassTransit(x =>
             {
+                x.SetKebabCaseEndpointNameFormatter();
+
                 x.UsingRabbitMq((context, configurator) =>
                 {
                     configurator.UseHealthCheck(context);
