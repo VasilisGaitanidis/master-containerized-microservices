@@ -1,13 +1,11 @@
-using Catalog.Api.Extensions;
-using Catalog.Application;
-using Catalog.Infrastructure;
+using Cart.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Catalog.Api
+namespace Cart.Api
 {
     public class Startup
     {
@@ -22,8 +20,6 @@ namespace Catalog.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCustomControllers()
-                .AddCatalogApplication()
-                .AddCatalogInfrastructure()
                 .AddSwagger()
                 .AddMassTransit(Configuration);
         }
@@ -36,15 +32,12 @@ namespace Catalog.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCustomSwagger();
-
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
             });
         }
