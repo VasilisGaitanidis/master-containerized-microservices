@@ -28,7 +28,14 @@ services:
     ports:
       - "5002:80"
 
+  cart.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5003:80"
+
 volumes:
   sqlserver-data:
     external: false
+
 
