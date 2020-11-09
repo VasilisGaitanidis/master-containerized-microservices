@@ -1,4 +1,6 @@
-﻿using Cart.Api.Configuration;
+﻿using System;
+using Cart.Api.Configuration;
+using Cart.Api.Consumers;
 using Infrastructure;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +44,8 @@ namespace Cart.Api.Extensions
             return services.AddMassTransit(x =>
             {
                 x.SetKebabCaseEndpointNameFormatter();
+
+                x.AddConsumer<CatalogItemCreatedConsumer>();
 
                 x.UsingRabbitMq((context, configurator) =>
                 {

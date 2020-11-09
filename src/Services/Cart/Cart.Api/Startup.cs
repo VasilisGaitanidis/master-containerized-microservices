@@ -32,6 +32,8 @@ namespace Cart.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCustomSwagger();
+
             app.UseRouting();
 
             app.UseAuthorization();
