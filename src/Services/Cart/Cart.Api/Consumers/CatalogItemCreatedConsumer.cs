@@ -18,6 +18,7 @@ namespace Cart.Api.Consumers
         public async Task Consume(ConsumeContext<CatalogItemCreatedIntegrationEvent> context)
         {
             _logger.LogInformation($"CatalogItemCreatedConsumer - happened with correlation Id {context.CorrelationId}");
+            _logger.LogInformation("CatalogItemCreatedConsumer - with message '{0}' ", context.Message.ToString());
 
             await Task.Delay(300);
 

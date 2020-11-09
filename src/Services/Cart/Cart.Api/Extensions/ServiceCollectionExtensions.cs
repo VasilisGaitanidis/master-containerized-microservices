@@ -55,6 +55,7 @@ namespace Cart.Api.Extensions
                         h.Username(rabbitMqOptions.Username);
                         h.Password(rabbitMqOptions.Password);
                     });
+                    configurator.ConfigureEndpoints(context);
                 });
             }).AddMassTransitHostedService();
         }
