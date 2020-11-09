@@ -19,6 +19,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CatalogDb;User Id=sa;Password=<MyStrongP@ssw0rd>;
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
     ports:
       - "5001:80"
 
@@ -31,6 +34,9 @@ services:
   cart.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
     ports:
       - "5003:80"
 

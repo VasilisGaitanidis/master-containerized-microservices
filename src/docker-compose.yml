@@ -4,9 +4,13 @@ services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: always
+    networks:
+      - master
 
   rabbitmq:
     image: rabbitmq:3-management
+    networks:
+      - master
 
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
@@ -15,17 +19,28 @@ services:
       dockerfile: Services/Catalog/Catalog.Api/Dockerfile
     depends_on:
       - sqlserver
+      - rabbitmq
+    networks:
+      - master
 
   ordering.api:
     image: ${DOCKER_REGISTRY-}orderingapi
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.Api/Dockerfile
-
+    networks:
+      - master
 
   cart.api:
     image: ${DOCKER_REGISTRY-}cartapi
     build:
       context: .
       dockerfile: Services/Cart/Cart.Api/Dockerfile
+    depends_on:
+      - rabbitmq
+    networks:
+      - master
 
+networks:
+  master:
+    name: master-network
