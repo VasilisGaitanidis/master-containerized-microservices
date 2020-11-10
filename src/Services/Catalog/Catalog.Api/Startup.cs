@@ -24,7 +24,7 @@ namespace Catalog.Api
         {
             services.AddCustomControllers()
                 .AddCatalogApplication()
-                .AddCatalogInfrastructure()
+                .AddCatalogInfrastructure(Configuration)
                 .AddSwagger(Configuration)
                 .AddMassTransit(Configuration);
         }

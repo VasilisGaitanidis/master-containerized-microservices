@@ -3,7 +3,6 @@ using Catalog.Domain.Repositories;
 using Catalog.Infrastructure.Repositories;
 using Infrastructure;
 using Infrastructure.Data;
-using Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,11 +11,11 @@ namespace Catalog.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddCatalogInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddCatalogInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             return services
                 .AddRepositories()
-                .AddCustomDbContext()
+                .AddCustomDbContext(configuration)
                 .AddInfrastructure();
         }
 
@@ -26,9 +25,9 @@ namespace Catalog.Infrastructure
                 .AddScoped<ICatalogItemRepository, CatalogItemRepository>();
         }
 
-        public static IServiceCollection AddCustomDbContext(this IServiceCollection services)
+        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = ConfigurationHelper.GetConfiguration().GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<CatalogDataContext>(options =>
             {
