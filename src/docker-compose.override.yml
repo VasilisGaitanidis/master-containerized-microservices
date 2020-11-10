@@ -1,20 +1,6 @@
 version: '3.4'
 
 services:
-  sqlserver:
-    environment:
-      - SA_PASSWORD=<MyStrongP@ssw0rd>
-      - ACCEPT_EULA=Y
-    ports:
-      - "1433:1433"
-    volumes:
-      - sqlserver-data:/var/opt/mssql
-
-  rabbitmq:
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -39,6 +25,20 @@ services:
       - RabbitMq__Password=guest
     ports:
       - "5003:80"
+
+  sqlserver:
+    environment:
+      - SA_PASSWORD=<MyStrongP@ssw0rd>
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
 
 volumes:
   sqlserver-data:

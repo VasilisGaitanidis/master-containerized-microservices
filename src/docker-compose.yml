@@ -1,17 +1,6 @@
 version: '3.4'
 
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    restart: always
-    networks:
-      - master
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    networks:
-      - master
-
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
@@ -21,7 +10,7 @@ services:
       - sqlserver
       - rabbitmq
     networks:
-      - master
+      - microstore
 
   ordering.api:
     image: ${DOCKER_REGISTRY-}orderingapi
@@ -29,7 +18,7 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.Api/Dockerfile
     networks:
-      - master
+      - microstore
 
   cart.api:
     image: ${DOCKER_REGISTRY-}cartapi
@@ -39,8 +28,19 @@ services:
     depends_on:
       - rabbitmq
     networks:
-      - master
+      - microstore
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    networks:
+      - microstore
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    networks:
+      - microstore
 
 networks:
-  master:
-    name: master-network
+  microstore:
+    name: microstore-network
