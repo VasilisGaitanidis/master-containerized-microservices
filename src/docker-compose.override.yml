@@ -10,10 +10,18 @@ services:
     volumes:
       - sqlserver-data:/var/opt/mssql
 
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CatalogDb;User Id=sa;Password=<MyStrongP@ssw0rd>;
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
     ports:
       - "5001:80"
 
@@ -23,7 +31,17 @@ services:
     ports:
       - "5002:80"
 
+  cart.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
+    ports:
+      - "5003:80"
+
 volumes:
   sqlserver-data:
     external: false
+
 

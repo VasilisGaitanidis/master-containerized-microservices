@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Application.Exceptions
+﻿namespace Application.Exceptions
 {
     public abstract class EntityNotFoundException : AppException
     {

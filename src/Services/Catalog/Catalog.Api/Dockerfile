@@ -7,6 +7,12 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Services/Catalog/Catalog.Api/Catalog.Api.csproj", "Services/Catalog/Catalog.Api/"]
+COPY ["Services/Catalog/Catalog.Application/Catalog.Application.csproj", "Services/Catalog/Catalog.Application/"]
+COPY ["BuildingBlocks/Application/Application.csproj", "BuildingBlocks/Application/"]
+COPY ["BuildingBlocks/Domain/Domain.csproj", "BuildingBlocks/Domain/"]
+COPY ["Services/Catalog/Catalog.Domain/Catalog.Domain.csproj", "Services/Catalog/Catalog.Domain/"]
+COPY ["Services/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj", "Services/Catalog/Catalog.Infrastructure/"]
+COPY ["BuildingBlocks/Infrastructure/Infrastructure.csproj", "BuildingBlocks/Infrastructure/"]
 RUN dotnet restore "Services/Catalog/Catalog.Api/Catalog.Api.csproj"
 COPY . .
 WORKDIR "/src/Services/Catalog/Catalog.Api"
