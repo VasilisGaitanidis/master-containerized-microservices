@@ -23,8 +23,8 @@ namespace Catalog.Api
         {
             services.AddCustomControllers()
                 .AddCatalogApplication()
-                .AddCatalogInfrastructure()
-                .AddSwagger()
+                .AddCatalogInfrastructure(Configuration)
+                .AddSwagger(Configuration)
                 .AddMassTransit(Configuration);
         }
 
