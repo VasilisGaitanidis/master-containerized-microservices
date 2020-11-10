@@ -1,22 +1,24 @@
-﻿using Catalog.Api.Configuration;
-using Catalog.Api.Filters;
+﻿using System;
+using Cart.Api.Configuration;
+using Cart.Api.Consumers;
 using Infrastructure;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Catalog.Api.Extensions
+namespace Cart.Api.Extensions
 {
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
             services.AddControllers(
-                options =>
-                {
-                    options.Filters.Add<HttpGlobalExceptionFilter>();
-                });
+                //options =>
+                //{
+                //    options.Filters.Add<HttpGlobalExceptionFilter>();
+                //}
+                );
 
             return services;
         }
@@ -28,9 +30,9 @@ namespace Catalog.Api.Extensions
                 {
                     x.SwaggerDoc("v1", new OpenApiInfo
                     {
-                        Title = "Catalog API",
+                        Title = "Cart API",
                         Version = "v1",
-                        Description = "The catalog microservice."
+                        Description = "The cart microservice."
                     });
                 });
         }
@@ -43,6 +45,8 @@ namespace Catalog.Api.Extensions
             {
                 x.SetKebabCaseEndpointNameFormatter();
 
+                x.AddConsumer<CatalogItemCreatedConsumer>();
+
                 x.UsingRabbitMq((context, configurator) =>
                 {
                     configurator.UseHealthCheck(context);
@@ -51,6 +55,7 @@ namespace Catalog.Api.Extensions
                         h.Username(rabbitMqOptions.Username);
                         h.Password(rabbitMqOptions.Password);
                     });
+                    configurator.ConfigureEndpoints(context);
                 });
             }).AddMassTransitHostedService();
         }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.Application.Dtos.Responses;
-using Catalog.Application.UseCases.CreateCatalogItem;
+using Catalog.Application.UseCases.Commands.CreateCatalogItem;
 using Catalog.Domain.Models;
 using Catalog.Domain.Repositories;
 using Moq;
