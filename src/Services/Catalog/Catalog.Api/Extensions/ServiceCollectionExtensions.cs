@@ -21,16 +21,18 @@ namespace Catalog.Api.Extensions
             return services;
         }
 
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        public static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
         {
+            var swaggerOptions = configuration.GetOptions<SwaggerOptions>("Swagger");
+
             return services
                 .AddSwaggerGen(x =>
                 {
-                    x.SwaggerDoc("v1", new OpenApiInfo
+                    x.SwaggerDoc(swaggerOptions.Name, new OpenApiInfo
                     {
-                        Title = "Catalog API",
-                        Version = "v1",
-                        Description = "The catalog microservice."
+                        Title = swaggerOptions.Title,
+                        Version = swaggerOptions.Version,
+                        Description = swaggerOptions.Description
                     });
                 });
         }
