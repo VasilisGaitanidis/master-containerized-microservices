@@ -41,6 +41,11 @@ services:
     networks:
       - microstore
 
+  seq:
+    image: datalust/seq
+    networks:
+    - microstore
+
 networks:
   microstore:
     name: microstore-network

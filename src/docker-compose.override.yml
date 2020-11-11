@@ -8,6 +8,8 @@ services:
       - RabbitMq__Host=rabbitmq
       - RabbitMq__Username=guest
       - RabbitMq__Password=guest
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq
     ports:
       - "5001:80"
 
@@ -40,8 +42,20 @@ services:
       - "15672:15672"
       - "5672:5672"
 
+  seq:
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5340:80"
+      - "5341:5341"
+    volumes:
+      - seq-data:/data
+
 volumes:
   sqlserver-data:
+    external: false
+
+  seq-data:
     external: false
 
 
