@@ -35,7 +35,7 @@ namespace Application.Behaviors
 
             if (failures.Any())
             {
-                _logger.LogWarning($"Validation errors on {typeof(TRequest).Name} - Errors: {failures}");
+                _logger.LogWarning($"Validation errors on {typeof(TRequest).Name}");
 
                 throw new ValidationAppException($"Command validation errors for type {typeof(TRequest).Name}", new ValidationException(failures));
             }
