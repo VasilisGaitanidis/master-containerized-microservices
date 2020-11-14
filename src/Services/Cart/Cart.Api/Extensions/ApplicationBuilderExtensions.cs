@@ -6,12 +6,12 @@ namespace Cart.Api.Extensions
     {
         public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app)
         {
-            app.UseSwagger().UseSwaggerUI(c =>
+            return app.UseSwagger().UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cart.API V1");
             });
-
-            return app;
         }
+
+        
     }
 }
