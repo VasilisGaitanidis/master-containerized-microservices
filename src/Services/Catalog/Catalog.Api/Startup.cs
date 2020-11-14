@@ -1,7 +1,9 @@
 using Catalog.Api.Extensions;
 using Catalog.Application;
 using Catalog.Infrastructure;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,11 +23,13 @@ namespace Catalog.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCustomControllers()
+            services
+                .AddCustomControllers()
                 .AddCatalogApplication()
                 .AddCatalogInfrastructure(Configuration)
-                .AddSwagger(Configuration)
-                .AddMassTransit(Configuration);
+                .AddCustomSwagger(Configuration)
+                .AddCustomMassTransit(Configuration)
+                .AddCustomHealthChecks(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +50,11 @@ namespace Catalog.Api
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/healthchecks", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }

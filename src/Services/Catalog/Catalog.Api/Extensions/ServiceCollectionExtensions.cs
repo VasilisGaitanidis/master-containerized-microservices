@@ -21,7 +21,7 @@ namespace Catalog.Api.Extensions
             return services;
         }
 
-        public static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
         {
             var swaggerOptions = configuration.GetOptions<SwaggerOptions>("Swagger");
 
@@ -37,7 +37,7 @@ namespace Catalog.Api.Extensions
                 });
         }
 
-        public static IServiceCollection AddMassTransit(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCustomMassTransit(this IServiceCollection services, IConfiguration configuration)
         {
             var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMq");
 
@@ -55,6 +55,25 @@ namespace Catalog.Api.Extensions
                     });
                 });
             }).AddMassTransitHostedService();
+        }
+
+        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
+        {
+            var healthChecksBuilder = services.AddHealthChecks();
+
+            healthChecksBuilder.AddSqlServer(
+                configuration.GetConnectionString("CatalogSqlServer"),
+                name: "CatalogSqlServer-check",
+                tags: new[] { "catalogsqlserver" });
+
+            var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMq");
+
+            healthChecksBuilder.AddRabbitMQ(
+                $"amqp://{rabbitMqOptions.Username}:{rabbitMqOptions.Password}@{rabbitMqOptions.Host}{rabbitMqOptions.VirtualHost}",
+                name: "CatalogRabbitMQ-check",
+                tags: new[] { "catalograbbitmq" });
+
+            return services;
         }
     }
 }
