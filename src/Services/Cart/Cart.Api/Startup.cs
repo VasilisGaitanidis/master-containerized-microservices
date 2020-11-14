@@ -19,9 +19,10 @@ namespace Cart.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCustomControllers()
-                .AddSwagger()
-                .AddMassTransit(Configuration);
+            services
+                .AddCustomControllers()
+                .AddCustomSwagger()
+                .AddCustomMassTransit(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

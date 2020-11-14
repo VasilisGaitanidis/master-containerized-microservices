@@ -23,7 +23,7 @@ namespace Cart.Api.Extensions
             return services;
         }
 
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
         {
             return services
                 .AddSwaggerGen(x =>
@@ -37,7 +37,7 @@ namespace Cart.Api.Extensions
                 });
         }
 
-        public static IServiceCollection AddMassTransit(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCustomMassTransit(this IServiceCollection services, IConfiguration configuration)
         {
             var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMq");
 
