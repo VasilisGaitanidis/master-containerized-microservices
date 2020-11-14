@@ -59,8 +59,21 @@ namespace Catalog.Api.Extensions
 
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
         {
-            return services;
+            var healthChecksBuilder = services.AddHealthChecks();
 
+            healthChecksBuilder.AddSqlServer(
+                configuration.GetConnectionString("DefaultConnection"),
+                name: "CatalogSqlServer-check",
+                tags: new[] { "catalogsqlserver" });
+
+            var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMq");
+
+            healthChecksBuilder.AddRabbitMQ(
+                $"amqp://{rabbitMqOptions.Username}:{rabbitMqOptions.Password}@{rabbitMqOptions.Host}{rabbitMqOptions.VirtualHost}",
+                name: "CatalogRabbitMQ-check",
+                tags: new[] { "catalograbbitmq" });
+
+            return services;
         }
     }
 }
