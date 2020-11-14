@@ -34,7 +34,7 @@ namespace Catalog.Infrastructure
     {
         public CatalogDataContext CreateDbContext(string[] args)
         {
-            var connectionString = ConfigurationHelper.GetConfiguration(AppContext.BaseDirectory).GetConnectionString("DefaultConnection");
+            var connectionString = ConfigurationHelper.GetConfiguration(AppContext.BaseDirectory).GetConnectionString("CatalogSqlServer");
 
             var optionsBuilder = new DbContextOptionsBuilder<CatalogDataContext>()
                 .UseSqlServer(connectionString,

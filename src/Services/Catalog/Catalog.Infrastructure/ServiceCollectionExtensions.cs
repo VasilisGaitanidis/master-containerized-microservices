@@ -27,7 +27,7 @@ namespace Catalog.Infrastructure
 
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("CatalogSqlServer");
 
             services.AddDbContext<CatalogDataContext>(options =>
             {

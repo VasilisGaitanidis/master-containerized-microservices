@@ -62,7 +62,7 @@ namespace Catalog.Api.Extensions
             var healthChecksBuilder = services.AddHealthChecks();
 
             healthChecksBuilder.AddSqlServer(
-                configuration.GetConnectionString("DefaultConnection"),
+                configuration.GetConnectionString("CatalogSqlServer"),
                 name: "CatalogSqlServer-check",
                 tags: new[] { "catalogsqlserver" });
 
