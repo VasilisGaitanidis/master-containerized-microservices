@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["ApiGateways/WebApiGateway/WebApiGateway.csproj", "ApiGateways/WebApiGateway/"]
-RUN dotnet restore "ApiGateways/WebApiGateway/WebApiGateway.csproj"
+COPY ["ApiGateways/Gateway.WebApi/Gateway.WebApi.csproj", "ApiGateways/Gateway.WebApi/"]
+RUN dotnet restore "ApiGateways/Gateway.WebApi/Gateway.WebApi.csproj"
 COPY . .
-WORKDIR "/src/ApiGateways/WebApiGateway"
-RUN dotnet build "WebApiGateway.csproj" -c Release -o /app/build
+WORKDIR "/src/ApiGateways/Gateway.WebApi"
+RUN dotnet build "Gateway.WebApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WebApiGateway.csproj" -c Release -o /app/publish
+RUN dotnet publish "Gateway.WebApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WebApiGateway.dll"]
+ENTRYPOINT ["dotnet", "Gateway.WebApi.dll"]

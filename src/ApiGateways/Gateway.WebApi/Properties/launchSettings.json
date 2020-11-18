@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebApiGateway": {
+    "Gateway.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

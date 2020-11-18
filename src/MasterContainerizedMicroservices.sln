@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Api", "Services\Cart\C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{B3E9322D-06BF-415B-8CC6-45E0B567D19A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiGateway", "ApiGateways\WebApiGateway\WebApiGateway.csproj", "{432917E8-086C-4F30-866F-31EDB4DC5EF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.WebApi", "ApiGateways\Gateway.WebApi\Gateway.WebApi.csproj", "{432917E8-086C-4F30-866F-31EDB4DC5EF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
