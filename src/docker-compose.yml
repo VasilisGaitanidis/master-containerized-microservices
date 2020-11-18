@@ -46,6 +46,12 @@ services:
     networks:
     - microstore
 
+  gateway.webapi:
+    image: ${DOCKER_REGISTRY-}gatewaywebapi
+    build:
+      context: .
+      dockerfile: ApiGateways/Gateway.WebApi/Dockerfile
+
 networks:
   microstore:
     name: microstore-network
