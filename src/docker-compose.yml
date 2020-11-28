@@ -44,13 +44,24 @@ services:
   seq:
     image: datalust/seq
     networks:
-    - microstore
+      - microstore
+
+  consul:
+    image: consul
+    networks:
+      - microstore
 
   gateway.webapi:
     image: ${DOCKER_REGISTRY-}gatewaywebapi
     build:
       context: .
       dockerfile: ApiGateways/Gateway.WebApi/Dockerfile
+    depends_on:
+      - catalog.api
+      - cart.api
+      - ordering.api
+    networks:
+      - microstore
 
 networks:
   microstore:

@@ -10,6 +10,8 @@ services:
       - RabbitMq__Password=guest
       - Serilog__WriteTo__1__Name=Seq
       - Serilog__WriteTo__1__Args__serverUrl=http://seq
+      - Consul__ConsulAddress=http://consul:8500
+      - Consul__ServiceAddress=http://catalog.api
     ports:
       - "5001:80"
 
@@ -51,6 +53,12 @@ services:
     volumes:
       - seq-data:/data
 
+  consul:
+    ports:
+      - "8500:8500"
+    volumes:
+      - consul-data:/consul/data
+
   gateway.webapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -68,5 +76,7 @@ volumes:
   seq-data:
     external: false
 
+  consul-data:
+    external: false  
 
 
