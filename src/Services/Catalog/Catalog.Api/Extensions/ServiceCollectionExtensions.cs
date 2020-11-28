@@ -1,6 +1,6 @@
 ﻿using Catalog.Api.Configuration;
 using Catalog.Api.Filters;
-using Infrastructure;
+using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

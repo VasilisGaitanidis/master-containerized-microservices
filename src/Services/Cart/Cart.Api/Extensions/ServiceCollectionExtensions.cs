@@ -1,7 +1,6 @@
-﻿using System;
-using Cart.Api.Configuration;
+﻿using Cart.Api.Configuration;
 using Cart.Api.Consumers;
-using Infrastructure;
+using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
