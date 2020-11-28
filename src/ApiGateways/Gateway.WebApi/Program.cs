@@ -13,10 +13,6 @@ namespace Gateway.WebApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
                 .ConfigureAppConfiguration((context, configurationBuilder) =>
                 {
                     configurationBuilder
@@ -26,6 +22,10 @@ namespace Gateway.WebApi
                         .AddJsonFile("ocelot.json")
                         .AddJsonFile($"ocelot.{context.HostingEnvironment.EnvironmentName}.json", true, true)
                         .AddEnvironmentVariables();
+                })
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

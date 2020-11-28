@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{version}/catalog",
+      "DownstreamPathTemplate": "/api/{version}/catalog/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,7 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/catalog",
+      "UpstreamPathTemplate": "/api/gateway/catalog/{everything}",
       "UpstreamHttpMethod": [ "POST" ]
     }
   ]
