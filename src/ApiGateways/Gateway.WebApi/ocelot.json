@@ -1,16 +1,18 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{version}/catalog/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "catalog.api",
-          "Port": 5001
-        }
-      ],
+      "DownstreamPathTemplate": "/api/catalog/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "CatalogService",
       "UpstreamPathTemplate": "/api/gateway/catalog/{everything}",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "consul",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
 }
