@@ -31,10 +31,24 @@ namespace Infrastructure.Consul
                 ID = _registrationId,
                 Name = _consulOptions.ServiceName,
                 Address = _consulOptions.ServiceAddress.Host,
-                Port = _consulOptions.ServiceAddress.Port
+                Port = _consulOptions.ServiceAddress.Port,
+                Tags = _consulOptions.Tags
             };
 
-            _logger.LogInformation("Registering service with registration Id {RegistrationId} on Consul", _registrationId);
+            if (!_consulOptions.DisableAgentCheck)
+            {
+                var secondsAfterServiceDeregistration = _consulOptions.ServiceDeregistrationSeconds ?? 60;
+                var intervalSeconds = _consulOptions.IntervalSeconds ?? 30;
+
+                registration.Check = new AgentServiceCheck
+                {
+                    DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(secondsAfterServiceDeregistration),
+                    Interval = TimeSpan.FromSeconds(intervalSeconds),
+                    HTTP = new Uri(_consulOptions.ServiceAddress, "healthchecks").OriginalString
+                };
+            }
+
+            _logger.LogInformation("Registering service with registration Id {RegistrationId} with Consul", _registrationId);
 
             await _consulClient.Agent.ServiceDeregister(registration.ID, cancellationToken);
             await _consulClient.Agent.ServiceRegister(registration, cancellationToken);
@@ -42,7 +56,7 @@ namespace Infrastructure.Consul
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("De-registering service with registration Id {RegistrationId} on Consul", _registrationId);
+            _logger.LogInformation("De-registering service with registration Id {RegistrationId} from Consul", _registrationId);
 
             await _consulClient.Agent.ServiceDeregister(_registrationId, cancellationToken);
         }
