@@ -3,9 +3,12 @@
     {
       "DownstreamPathTemplate": "/api/catalog/{everything}",
       "DownstreamScheme": "http",
-      "ServiceName": "CatalogService",
       "UpstreamPathTemplate": "/api/gateway/catalog/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "ServiceName": "CatalogService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     }
   ],
   "GlobalConfiguration": {
