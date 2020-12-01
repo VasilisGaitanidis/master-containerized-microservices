@@ -5,7 +5,7 @@
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/gateway/catalog/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "ServiceName": "CatalogService",
+      "ServiceName": "catalog-service",
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       }
