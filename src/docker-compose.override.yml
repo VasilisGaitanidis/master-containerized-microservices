@@ -13,7 +13,7 @@ services:
       - Consul__ConsulAddress=http://consul:8500
       - Consul__ServiceAddress=http://catalog.api
     ports:
-      - "5001:80"
+      - "80"
 
   ordering.api:
     environment:
