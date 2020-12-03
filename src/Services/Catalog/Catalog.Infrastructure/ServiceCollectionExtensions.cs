@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Catalog.Domain.Repositories;
 using Catalog.Infrastructure.Repositories;
-using Infrastructure;
 using Infrastructure.Data;
+using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +16,7 @@ namespace Catalog.Infrastructure
             return services
                 .AddRepositories()
                 .AddCustomDbContext(configuration)
-                .AddInfrastructure();
+                .AddInfrastructure(configuration);
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
