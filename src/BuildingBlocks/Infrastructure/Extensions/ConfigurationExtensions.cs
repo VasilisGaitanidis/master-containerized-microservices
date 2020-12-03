@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure
+namespace Infrastructure.Extensions
 {
     /// <summary>
     /// Static helper class for <see cref="IConfiguration"/>.
