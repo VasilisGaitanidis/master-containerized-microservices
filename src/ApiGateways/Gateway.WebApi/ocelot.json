@@ -26,6 +26,11 @@
     "PeriodTimespan": 1,
     "Limit": 1
   },
+  "QoSOptions": {
+    "ExceptionsAllowedBeforeBreaking": 3,
+    "DurationOfBreak": 5000,
+    "TimeoutValue": 2000
+  },
   "SwaggerEndPoints": [
     {
       "Key": "catalog",
