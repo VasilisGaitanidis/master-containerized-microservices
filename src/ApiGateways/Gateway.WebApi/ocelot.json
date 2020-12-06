@@ -6,9 +6,6 @@
       "UpstreamPathTemplate": "/api/gateway/catalog/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "ServiceName": "catalog-service",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      },
       "SwaggerKey": "catalog"
     }
   ],
@@ -30,6 +27,9 @@
     "ExceptionsAllowedBeforeBreaking": 3,
     "DurationOfBreak": 5000,
     "TimeoutValue": 2000
+  },
+  "LoadBalancerOptions": {
+    "Type": "LeastConnection"
   },
   "SwaggerEndPoints": [
     {
