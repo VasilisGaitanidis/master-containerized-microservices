@@ -6,9 +6,6 @@
       "UpstreamPathTemplate": "/api/gateway/catalog/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "ServiceName": "catalog-service",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      },
       "SwaggerKey": "catalog"
     }
   ],
@@ -18,6 +15,21 @@
       "Port": 8500,
       "Type": "Consul"
     }
+  },
+  "RateLimitOptions": {
+    "ClientWhitelist": [],
+    "EnableRateLimiting": true,
+    "Period": "1s",
+    "PeriodTimespan": 1,
+    "Limit": 1
+  },
+  "QoSOptions": {
+    "ExceptionsAllowedBeforeBreaking": 3,
+    "DurationOfBreak": 5000,
+    "TimeoutValue": 2000
+  },
+  "LoadBalancerOptions": {
+    "Type": "LeastConnection"
   },
   "SwaggerEndPoints": [
     {
