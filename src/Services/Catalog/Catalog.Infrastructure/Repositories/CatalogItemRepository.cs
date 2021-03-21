@@ -26,7 +26,7 @@ namespace Catalog.Infrastructure.Repositories
             return catalogItem;
         }
 
-        public async Task<List<CatalogItem>> GetCatalogItemsAsync()
+        public async Task<IEnumerable<CatalogItem>> GetCatalogItemsAsync()
         {
             var catalogItems = await _context.CatalogItems
                 .ToListAsync();

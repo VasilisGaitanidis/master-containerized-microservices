@@ -10,7 +10,7 @@ namespace Catalog.Domain.Repositories
     {
         Task<CatalogItem> GetCatalogItemAsync(Guid id);
 
-        Task<List<CatalogItem>> GetCatalogItemsAsync();
+        Task<IEnumerable<CatalogItem>> GetCatalogItemsAsync();
 
         Task<CatalogItem> AddAsync(CatalogItem catalogItem);
 
