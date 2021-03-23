@@ -22,16 +22,18 @@ namespace Cart.Api.Extensions
             return services;
         }
 
-        public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
         {
+            var swaggerOptions = configuration.GetOptions<SwaggerOptions>("Swagger");
+
             return services
                 .AddSwaggerGen(x =>
                 {
-                    x.SwaggerDoc("v1", new OpenApiInfo
+                    x.SwaggerDoc(swaggerOptions.Name, new OpenApiInfo
                     {
-                        Title = "Cart API",
-                        Version = "v1",
-                        Description = "The cart microservice."
+                        Title = swaggerOptions.Title,
+                        Version = swaggerOptions.Version,
+                        Description = swaggerOptions.Description
                     });
                 });
         }

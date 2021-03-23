@@ -21,7 +21,7 @@ namespace Cart.Api
         {
             services
                 .AddCustomControllers()
-                .AddCustomSwagger()
+                .AddCustomSwagger(Configuration)
                 .AddCustomMassTransit(Configuration);
         }
 
