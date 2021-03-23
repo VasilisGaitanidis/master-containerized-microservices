@@ -27,13 +27,13 @@ namespace Catalog.Api.Controllers
 
         [HttpGet("items")]
         [ProducesResponseType(typeof(IEnumerable<CatalogItemDto>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetCatalogItemsAsync()
+        public async Task<ActionResult<IEnumerable<CatalogItemDto>>> GetCatalogItemsAsync()
             => Ok(await _mediator.Send(new GetCatalogItemsQuery()));
 
         [HttpGet("items/{id:Guid}", Name = "GetCatalogItem")]
         [ProducesResponseType(typeof(CatalogItemDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetCatalogItemAsync(Guid id)
+        public async Task<ActionResult<CatalogItemDto>> GetCatalogItemAsync(Guid id)
            => Ok(await _mediator.Send(new GetCatalogItemByIdQuery(id)));
 
         [HttpPost("items")]
