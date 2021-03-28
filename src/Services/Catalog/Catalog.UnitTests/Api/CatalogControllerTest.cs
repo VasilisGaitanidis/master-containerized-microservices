@@ -41,8 +41,8 @@ namespace Catalog.UnitTests.Api
             var actionResult = await catalogController.GetCatalogItemsAsync();
 
             // Assert
-            Assert.IsType<OkObjectResult>(actionResult);
-            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult).StatusCode);
+            Assert.IsType<OkObjectResult>(actionResult.Result);
+            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult.Result).StatusCode);
         }
 
         #endregion
@@ -63,8 +63,8 @@ namespace Catalog.UnitTests.Api
             var actionResult = await catalogController.GetCatalogItemAsync(fakeCatalogItemId);
 
             // Assert
-            Assert.IsType<OkObjectResult>(actionResult);
-            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult).StatusCode);
+            Assert.IsType<OkObjectResult>(actionResult.Result);
+            Assert.Equal(StatusCodes.Status200OK, ((OkObjectResult)actionResult.Result).StatusCode);
         }
 
         #endregion
