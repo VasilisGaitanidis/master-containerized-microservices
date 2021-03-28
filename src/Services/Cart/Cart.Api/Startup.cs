@@ -1,5 +1,6 @@
 using Cart.Api.Extensions;
 using Cart.Application.Extensions;
+using Cart.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ namespace Cart.Api
             services
                 .AddCustomControllers()
                 .AddCartApplication()
+                .AddCartInfrastructure(Configuration)
                 .AddCustomSwagger(Configuration)
                 .AddCustomMassTransit(Configuration);
         }
