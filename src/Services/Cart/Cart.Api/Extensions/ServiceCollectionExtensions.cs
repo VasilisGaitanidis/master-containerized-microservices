@@ -1,5 +1,6 @@
 ﻿using Cart.Api.Configuration;
 using Cart.Api.Consumers;
+using Cart.Api.Filters;
 using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
@@ -12,12 +13,10 @@ namespace Cart.Api.Extensions
     {
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
-            services.AddControllers(
-                //options =>
-                //{
-                //    options.Filters.Add<HttpGlobalExceptionFilter>();
-                //}
-                );
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<HttpGlobalExceptionFilter>();
+            });
 
             return services;
         }
@@ -59,6 +58,18 @@ namespace Cart.Api.Extensions
                     configurator.ConfigureEndpoints(context);
                 });
             }).AddMassTransitHostedService();
+        }
+
+        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
+        {
+            var healthChecksBuilder = services.AddHealthChecks();
+
+            healthChecksBuilder.AddRedis(
+                configuration.GetConnectionString("Redis"),
+                name: "Redis-check",
+                tags: new[] { "cartredis" });
+
+            return services;
         }
     }
 }

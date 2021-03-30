@@ -18,13 +18,13 @@ namespace Cart.Application.Extensions
                     .AddMappings();
         }
 
-        private static IServiceCollection AddCqrsHandlers(this IServiceCollection services)
+        public static IServiceCollection AddCqrsHandlers(this IServiceCollection services)
         {
             return services
                 .AddMediatR(Assembly.GetExecutingAssembly());
         }
 
-        private static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
+        public static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
         {
             return services
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
@@ -32,13 +32,13 @@ namespace Cart.Application.Extensions
             // todo .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));?
         }
 
-        private static IServiceCollection AddValidators(this IServiceCollection services)
+        public static IServiceCollection AddValidators(this IServiceCollection services)
         {
             return services
                 .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        private static IServiceCollection AddMappings(this IServiceCollection services)
+        public static IServiceCollection AddMappings(this IServiceCollection services)
         {
             return services
                 .AddAutoMapper(Assembly.GetExecutingAssembly());

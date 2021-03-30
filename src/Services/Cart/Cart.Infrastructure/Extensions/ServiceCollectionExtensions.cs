@@ -1,5 +1,6 @@
 ﻿using Cart.Domain.Repositories;
 using Cart.Infrastructure.Repositories;
+using Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,8 @@ namespace Cart.Infrastructure.Extensions
         {
             return services
                 .AddRepositories()
-                .AddCustomRedis(configuration);
+                .AddCustomRedis(configuration)
+                .AddConsulServiceDiscovery(configuration);
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)

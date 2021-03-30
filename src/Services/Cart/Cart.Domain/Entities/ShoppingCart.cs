@@ -23,7 +23,7 @@ namespace Cart.Domain.Entities
         /// <summary>
         /// The shopping cart items.
         /// </summary>
-        public IEnumerable<ShoppingCartItem> Items { get; }
+        public IEnumerable<ShoppingCartItem> Items { get; set; }
 
         /// <summary>
         /// The shopping cart total price.
