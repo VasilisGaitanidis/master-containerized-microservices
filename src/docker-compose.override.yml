@@ -33,7 +33,7 @@ services:
       - Consul__ConsulAddress=http://consul:8500
       - Consul__ServiceAddress=http://cart.api
     ports:
-      - "5003:80"
+      - "80"
 
   sqlserver:
     environment:
