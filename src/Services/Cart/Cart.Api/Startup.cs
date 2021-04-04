@@ -1,5 +1,9 @@
 using Cart.Api.Extensions;
+using Cart.Application.Extensions;
+using Cart.Infrastructure.Extensions;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +25,11 @@ namespace Cart.Api
         {
             services
                 .AddCustomControllers()
+                .AddCartApplication()
+                .AddCartInfrastructure(Configuration)
                 .AddCustomSwagger(Configuration)
-                .AddCustomMassTransit(Configuration);
+                .AddCustomMassTransit(Configuration)
+                .AddCustomHealthChecks(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +49,11 @@ namespace Cart.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/healthchecks", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }

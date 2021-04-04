@@ -7,6 +7,22 @@
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "ServiceName": "catalog-service",
       "SwaggerKey": "catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/gateway/cart/{everything}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "ServiceName": "cart-service",
+      "SwaggerKey": "cart"
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/gateway/cart/",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "ServiceName": "cart-service",
+      "SwaggerKey": "cart"
     }
   ],
   "GlobalConfiguration": {

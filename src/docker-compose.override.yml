@@ -24,11 +24,16 @@ services:
   cart.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Redis=redis:6379
       - RabbitMq__Host=rabbitmq
       - RabbitMq__Username=guest
       - RabbitMq__Password=guest
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq
+      - Consul__ConsulAddress=http://consul:8500
+      - Consul__ServiceAddress=http://cart.api
     ports:
-      - "5003:80"
+      - "80"
 
   sqlserver:
     environment:
@@ -38,6 +43,10 @@ services:
       - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
+  
+  redis:
+    ports:
+      - "6379:6379"
 
   rabbitmq:
     ports:

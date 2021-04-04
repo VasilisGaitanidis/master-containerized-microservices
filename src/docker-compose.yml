@@ -26,6 +26,7 @@ services:
       context: .
       dockerfile: Services/Cart/Cart.Api/Dockerfile
     depends_on:
+      - redis
       - rabbitmq
     networks:
       - microstore
@@ -36,18 +37,27 @@ services:
     networks:
       - microstore
 
+  redis:
+    image: redis:alpine
+    restart: always
+    networks:
+      - microstore
+  
   rabbitmq:
     image: rabbitmq:3-management
+    restart: always
     networks:
       - microstore
 
   seq:
     image: datalust/seq
+    restart: always
     networks:
       - microstore
 
   consul:
     image: consul
+    restart: always
     networks:
       - microstore
 

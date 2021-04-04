@@ -19,7 +19,7 @@ namespace Gateway.WebApi
                         .SetBasePath(context.HostingEnvironment.ContentRootPath)
                         .AddJsonFile("appsettings.json", true, true)
                         .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true, true)
-                        .AddJsonFile("ocelot.json")
+                        .AddJsonFile("ocelot.json", false, true)
                         .AddJsonFile($"ocelot.{context.HostingEnvironment.EnvironmentName}.json", true, true)
                         .AddEnvironmentVariables();
                 })
