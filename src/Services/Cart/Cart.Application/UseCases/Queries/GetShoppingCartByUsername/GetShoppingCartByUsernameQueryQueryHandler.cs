@@ -13,9 +13,9 @@ namespace Cart.Application.UseCases.Queries.GetShoppingCartByUsername
         private readonly ICartRepository _cartRepository;
         private readonly IMapper _mapper;
 
-        public GetShoppingCartByUsernameQueryQueryHandler(ICartRepository catalogItemRepository, IMapper mapper)
+        public GetShoppingCartByUsernameQueryQueryHandler(ICartRepository cartRepository, IMapper mapper)
         {
-            _cartRepository = catalogItemRepository ?? throw new ArgumentNullException(nameof(catalogItemRepository));
+            _cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 

@@ -12,11 +12,10 @@ namespace Catalog.Api.Extensions
     {
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
-            services.AddControllers(
-                options =>
-                {
-                    options.Filters.Add<HttpGlobalExceptionFilter>();
-                });
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<HttpGlobalExceptionFilter>();
+            });
 
             return services;
         }
