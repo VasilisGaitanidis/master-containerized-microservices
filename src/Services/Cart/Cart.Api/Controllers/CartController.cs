@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Cart.Application.Dtos.Requests;
 using Cart.Application.Dtos.Responses;
+using Cart.Application.UseCases.Commands.DeleteShoppingCart;
 using Cart.Application.UseCases.Commands.UpdateShoppingCart;
 using Cart.Application.UseCases.Queries.GetShoppingCartByUsername;
 using MediatR;
@@ -29,10 +30,14 @@ namespace Cart.Api.Controllers
             => Ok(await _mediator.Send(new GetShoppingCartByUsernameQuery(username)));
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateShoppingCartAsync([FromBody] UpdateShoppingCartDto dto)
+        [ProducesResponseType(typeof(ShoppingCartDto), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ShoppingCartDto>> UpdateShoppingCartAsync([FromBody] UpdateShoppingCartDto dto)
             => Ok(await _mediator.Send(new UpdateShoppingCartCommand(dto.Username, dto.Items)));
+
+        [HttpDelete]
+        [Route("{username}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteShoppingCartAsync(string username)
+            => Ok(await _mediator.Send(new DeleteShoppingCartCommand(username)));
     }
 }
