@@ -30,6 +30,7 @@ namespace Cart.Api.Controllers
             => Ok(await _mediator.Send(new GetShoppingCartByUsernameQuery(username)));
 
         [HttpPut]
+        [Route("update")]
         [ProducesResponseType(typeof(ShoppingCartDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<ShoppingCartDto>> UpdateShoppingCartAsync([FromBody] UpdateShoppingCartDto dto)
             => Ok(await _mediator.Send(new UpdateShoppingCartCommand(dto.Username, dto.Items)));
