@@ -9,11 +9,11 @@ namespace Discount.Domain.Repositories
     public interface ICouponRepository
     {
         /// <summary>
-        /// Get coupon by <paramref name="id"/>
+        /// Get coupon by a <paramref name="productName"/>.
         /// </summary>
-        /// <param name="id">The coupon identifier.</param>
+        /// <param name="productName">The coupon product name.</param>
         /// <returns>A <see cref="Coupon"/> entity.</returns>
-        Task<Coupon> GetAsync(int id);
+        Task<Coupon> GetByProductNameAsync(string productName);
 
         /// <summary>
         /// Add a coupon.

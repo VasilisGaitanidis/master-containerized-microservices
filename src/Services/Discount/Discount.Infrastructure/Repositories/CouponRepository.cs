@@ -19,10 +19,10 @@ namespace Discount.Infrastructure.Repositories
         }
 
         /// <inheritdoc />
-        public async Task<Coupon> GetAsync(int id)
+        public async Task<Coupon> GetByProductNameAsync(string productName)
         {
             var coupon = await _context.Coupons
-                .Where(x => x.Id == id)
+                .Where(x => x.ProductName == productName)
                 .SingleOrDefaultAsync();
 
             return coupon;

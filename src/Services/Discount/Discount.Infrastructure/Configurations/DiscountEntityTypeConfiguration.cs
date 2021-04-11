@@ -13,8 +13,8 @@ namespace Discount.Infrastructure.Configurations
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.ProductName)
-                .IsRequired();
+            builder.HasIndex(x => x.ProductName)
+                .IsUnique();
 
             builder.Property(x => x.Amount)
                 .IsRequired();
