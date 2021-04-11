@@ -45,7 +45,8 @@ namespace Discount.Application.Extensions
         {
             return services
                 .AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
-                .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>))
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
         }
 
         /// <summary>
