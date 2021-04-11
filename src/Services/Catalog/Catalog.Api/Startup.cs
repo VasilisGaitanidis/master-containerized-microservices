@@ -1,5 +1,5 @@
 using Catalog.Api.Extensions;
-using Catalog.Application;
+using Catalog.Application.Extensions;
 using Catalog.Infrastructure;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
