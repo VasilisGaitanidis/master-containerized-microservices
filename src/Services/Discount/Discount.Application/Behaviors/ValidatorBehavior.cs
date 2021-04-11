@@ -10,6 +10,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Discount.Application.Behaviors
 {
+    /// <summary>
+    /// Handles validation behavior for a <typeparamref name="TRequest"/>.
+    /// </summary>
+    /// <typeparam name="TRequest">A generic request.</typeparam>
+    /// <typeparam name="TResponse">A generic response.</typeparam>
     public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
@@ -17,12 +22,18 @@ namespace Discount.Application.Behaviors
 
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="ValidatorBehavior{TRequest,TResponse}"/>.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="validators">The validators.</param>
         public ValidatorBehavior(ILogger<ValidatorBehavior<TRequest, TResponse>> logger, IEnumerable<IValidator<TRequest>> validators)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _validators = validators ?? throw new ArgumentNullException(nameof(validators));
         }
 
+        /// <inheritdoc />
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             _logger.LogInformation($"Validating {typeof(TRequest).Name}");
