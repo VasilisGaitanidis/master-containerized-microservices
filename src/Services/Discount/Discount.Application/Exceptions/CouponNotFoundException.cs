@@ -1,5 +1,4 @@
-﻿using System;
-using Application.Exceptions;
+﻿using Application.Exceptions;
 
 namespace Discount.Application.Exceptions
 {
