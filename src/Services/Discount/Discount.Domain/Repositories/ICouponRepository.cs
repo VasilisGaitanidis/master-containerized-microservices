@@ -31,7 +31,7 @@ namespace Discount.Domain.Repositories
         /// <summary>
         /// Delete a coupon.
         /// </summary>
-        /// <param name="couponId">The coupon identifier.</param>
-        void Delete(int couponId);
+        /// <param name="coupon">The coupon entity.</param>
+        void Delete(Coupon coupon);
     }
 }
