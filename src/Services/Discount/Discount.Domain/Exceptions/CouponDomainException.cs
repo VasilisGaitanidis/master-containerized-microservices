@@ -13,7 +13,5 @@ namespace Discount.Domain.Exceptions
         /// <inheritdoc />
         public CouponDomainException(string message, Exception innerException)
             : base(message, innerException) { }
-    {
-        
     }
 }
