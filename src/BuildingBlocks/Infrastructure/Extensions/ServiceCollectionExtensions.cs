@@ -23,7 +23,7 @@ namespace Infrastructure.Extensions
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
         {
             return services
-                .AddScoped<IUnitOfWork, UnitOfWork>();
+                .AddScoped<IUnitOfWork, EntityFrameworkUnitOfWork>();
         }
 
         public static IServiceCollection AddDomainEventDispatcher(this IServiceCollection services)
