@@ -10,7 +10,7 @@ namespace Catalog.Application.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Add Catalog application on <paramref name="services"/>.
+        /// Add catalog application on <paramref name="services"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
