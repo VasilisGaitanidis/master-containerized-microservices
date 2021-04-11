@@ -3,14 +3,16 @@ using Discount.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Discount.Infrastructure.Migrations
 {
     [DbContext(typeof(DiscountDataContext))]
-    partial class DiscountDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210411182728_UpdateCouponProductName")]
+    partial class UpdateCouponProductName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
