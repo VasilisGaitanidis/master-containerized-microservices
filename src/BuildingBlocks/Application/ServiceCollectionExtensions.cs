@@ -15,9 +15,9 @@ namespace Application
         public static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
         {
             return services
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>))
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>))
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
         }
     }
 }
