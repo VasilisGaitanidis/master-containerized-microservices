@@ -27,9 +27,8 @@ namespace Cart.Application.Extensions
         public static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
         {
             return services
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
-            // todo .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));?
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
         }
 
         public static IServiceCollection AddValidators(this IServiceCollection services)
