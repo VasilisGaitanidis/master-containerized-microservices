@@ -1,7 +1,6 @@
-﻿using Discount.Application.UseCases.Commands.DeleteCoupon;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Discount.Application.UseCases.Commands.UpdateCoupon
+namespace Discount.Application.UseCases.Commands.DeleteCoupon
 {
     /// <summary>
     /// The delete coupon command validator.
