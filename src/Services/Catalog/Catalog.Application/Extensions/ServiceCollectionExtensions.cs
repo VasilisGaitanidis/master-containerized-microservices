@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Catalog.Application.Extensions
 {
+    /// <summary>
+    /// The catalog application <see cref="IServiceCollection"/> extensions class.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
@@ -29,7 +32,7 @@ namespace Catalog.Application.Extensions
         /// Add MediatR command and query handlers on <paramref name="services"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
-        /// <returns>A service collection.</returns>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddCommandAndQueryHandlers(this IServiceCollection services)
         {
             return services
@@ -40,7 +43,7 @@ namespace Catalog.Application.Extensions
         /// Add MediatR pipeline behaviors on <paramref name="services"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
-        /// <returns>A service collection.</returns>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddPipelineBehaviors(this IServiceCollection services)
         {
             return services
@@ -53,7 +56,7 @@ namespace Catalog.Application.Extensions
         /// Add FluentValidation validators on <paramref name="services"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
-        /// <returns>A service collection.</returns>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddValidators(this IServiceCollection services)
         {
             return services
@@ -64,7 +67,7 @@ namespace Catalog.Application.Extensions
         /// Add AutoMapper profiles on <paramref name="services"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
-        /// <returns>A service collection.</returns>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddMappings(this IServiceCollection services)
         {
             return services

@@ -7,24 +7,46 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalog.Infrastructure
+namespace Catalog.Infrastructure.Extensions
 {
+    /// <summary>
+    /// The catalog infrastructure <see cref="IServiceCollection"/> extensions class.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Add catalog infrastructure on <paramref name="services"/>.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddCatalogInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             return services
                 .AddRepositories()
                 .AddCustomDbContext(configuration)
-                .AddInfrastructure(configuration);
+                .AddEntityFrameworkUnitOfWork()
+                .AddDomainEventDispatcher()
+                .AddConsulServiceDiscovery(configuration);
         }
 
+        /// <summary>
+        /// Add catalog repositories on <paramref name="services"/>.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
                 .AddScoped<ICatalogItemRepository, CatalogItemRepository>();
         }
 
+        /// <summary>
+        /// Add catalog database context on <paramref name="services"/>.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("CatalogSqlServer");
