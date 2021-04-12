@@ -1,11 +1,12 @@
-﻿using MediatR;
+﻿using Discount.Application.Dtos.Responses;
+using MediatR;
 
 namespace Discount.Application.UseCases.Commands.UpdateCoupon
 {
     /// <summary>
     /// The update coupon command.
     /// </summary>
-    public class UpdateCouponCommand : IRequest<Unit>
+    public class UpdateCouponCommand : IRequest<CouponDto>
     {
         /// <summary>
         /// Initializes a new instance of <see cref="UpdateCouponCommand"/>.

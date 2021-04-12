@@ -5,7 +5,7 @@ namespace Discount.Application.UseCases.Commands.DeleteCoupon
     /// <summary>
     /// The delete coupon command.
     /// </summary>
-    public class DeleteCouponCommand : IRequest<Unit>
+    public class DeleteCouponCommand : IRequest<bool>
     {
         /// <summary>
         /// Initializes a new instance of <see cref="DeleteCouponCommand"/>.
