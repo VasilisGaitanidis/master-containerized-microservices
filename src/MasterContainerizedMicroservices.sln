@@ -57,13 +57,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Domain", "Services\Car
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{8079EA54-AE9F-4983-B363-A059662C3F88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Grpc", "Services\Discount\Discount.Grpc\Discount.Grpc.csproj", "{DA304017-49E5-4FC5-B91C-461A0547FBCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.Grpc", "Services\Discount\Discount.Grpc\Discount.Grpc.csproj", "{DA304017-49E5-4FC5-B91C-461A0547FBCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Application", "Services\Discount\Discount.Application\Discount.Application.csproj", "{FD2664D9-5742-4A76-9D12-5286739C8A72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.Application", "Services\Discount\Discount.Application\Discount.Application.csproj", "{FD2664D9-5742-4A76-9D12-5286739C8A72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Infrastructure", "Services\Discount\Discount.Infrastructure\Discount.Infrastructure.csproj", "{7C480D9D-89DF-4488-9153-8D5AE4636146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.Infrastructure", "Services\Discount\Discount.Infrastructure\Discount.Infrastructure.csproj", "{7C480D9D-89DF-4488-9153-8D5AE4636146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Domain", "Services\Discount\Discount.Domain\Discount.Domain.csproj", "{359F63D9-4280-4770-941A-7A41A38DF1B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.Domain", "Services\Discount\Discount.Domain\Discount.Domain.csproj", "{359F63D9-4280-4770-941A-7A41A38DF1B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
