@@ -1,5 +1,8 @@
-﻿using Cart.Domain.Repositories;
+﻿using System;
+using Cart.Domain.Repositories;
 using Cart.Infrastructure.Repositories;
+using Cart.Infrastructure.Services.Grpc;
+using Discount.Grpc.Protos;
 using Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +25,8 @@ namespace Cart.Infrastructure.Extensions
             return services
                 .AddRepositories()
                 .AddCustomRedis(configuration)
-                .AddConsulServiceDiscovery(configuration);
+                .AddConsulServiceDiscovery(configuration)
+                .AddGrpcServices(configuration);
         }
 
         /// <summary>
@@ -46,6 +50,22 @@ namespace Cart.Infrastructure.Extensions
         {
             return services.AddStackExchangeRedisCache(options =>
                 options.Configuration = configuration.GetConnectionString("Redis"));
+        }
+
+        /// <summary>
+        /// Add gRPC services on <paramref name="services"/>.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The service collection.</returns>
+        public static IServiceCollection AddGrpcServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services
+                .AddScoped<IDiscountGrpcService, DiscountGrpcService>()
+                .AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(x =>
+                    x.Address = new Uri(configuration.GetConnectionString("DiscountGrpcUrl")));
+
+            return services;
         }
     }
 }
