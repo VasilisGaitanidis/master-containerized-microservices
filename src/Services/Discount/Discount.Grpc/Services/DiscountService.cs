@@ -31,55 +31,55 @@ namespace Discount.Grpc.Services
         }
 
         /// <summary>
-        /// Get discount gRPC method.
+        /// Get coupon gRPC method.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="context">The server call context.</param>
         /// <returns>A <see cref="Task{CouponModel}"/>.</returns>
-        public override async Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
+        public override async Task<CouponResponse> GetCoupon(GetCouponRequest request, ServerCallContext context)
         {
             var couponDto = await _mediator.Send(new GetCouponByProductNameQuery(request.ProductName));
 
-            return _mapper.Map<CouponModel>(couponDto);
+            return _mapper.Map<CouponResponse>(couponDto);
         }
 
         /// <summary>
-        /// Create discount gRPC method.
+        /// Create coupon gRPC method.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="context">The server call context.</param>
         /// <returns>A <see cref="Task{CouponModel}"/>.</returns>
-        public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
+        public override async Task<CouponResponse> CreateCoupon(CreateCouponRequest request, ServerCallContext context)
         {
             var couponDto = await _mediator.Send(new CreateCouponCommand(request.ProductName, request.Description, request.Amount));
 
-            return _mapper.Map<CouponModel>(couponDto);
+            return _mapper.Map<CouponResponse>(couponDto);
         }
 
         /// <summary>
-        /// Update discount gRPC method.
+        /// Update coupon gRPC method.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="context">The server call context.</param>
         /// <returns>A <see cref="Task{CouponModel}"/>.</returns>
-        public override async Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
+        public override async Task<CouponResponse> UpdateCoupon(UpdateCouponRequest request, ServerCallContext context)
         {
             var couponDto = await _mediator.Send(new UpdateCouponCommand(request.ProductName, request.Description, request.Amount));
 
-            return _mapper.Map<CouponModel>(couponDto);
+            return _mapper.Map<CouponResponse>(couponDto);
         }
 
         /// <summary>
-        /// Delete discount gRPC method.
+        /// Delete coupon gRPC method.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="context">The server call context.</param>
         /// <returns>A <see cref="Task{DeleteDiscountResponse}"/>.</returns>
-        public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
+        public override async Task<DeleteCouponResponse> DeleteCoupon(DeleteCouponRequest request, ServerCallContext context)
         {
             var deleted = await _mediator.Send(new DeleteCouponCommand(request.ProductName));
 
-            return new DeleteDiscountResponse { Success = deleted };
+            return new DeleteCouponResponse { Success = deleted };
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Discount.Grpc.Helpers
     {
         public CouponProfiles()
         {
-            CreateMap<CouponDto, CouponModel>();
+            CreateMap<CouponDto, CouponResponse>();
         }
     }
 }
