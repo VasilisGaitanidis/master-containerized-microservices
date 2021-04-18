@@ -25,7 +25,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Redis=redis:6379
-      #- ConnectionStrings__DiscountGrpcUrl=todo
+      - ConnectionStrings__DiscountGrpcUrl=discount.grpc
       - RabbitMq__Host=rabbitmq
       - RabbitMq__Username=guest
       - RabbitMq__Password=guest
@@ -35,6 +35,17 @@ services:
       - Consul__ServiceAddress=http://cart.api
     ports:
       - "80"
+
+  discount.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DiscountSqlServer=Server=sqlserver;Database=DiscountDb;User Id=sa;Password=<MyStrongP@ssw0rd>;
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
   sqlserver:
     environment:
@@ -76,7 +87,7 @@ services:
     ports:
       - "5000:80"
       - "443"
-    
+
 volumes:
   sqlserver-data:
     external: false
@@ -85,6 +96,4 @@ volumes:
     external: false
 
   consul-data:
-    external: false  
-
-
+    external: false
