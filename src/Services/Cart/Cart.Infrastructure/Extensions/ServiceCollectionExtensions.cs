@@ -60,6 +60,10 @@ namespace Cart.Infrastructure.Extensions
         /// <returns>The service collection.</returns>
         public static IServiceCollection AddGrpcServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // This switch must be set before creating the GrpcChannel/HttpClient. more info can be found here: 
+            // https://docs.microsoft.com/en-us/aspnet/core/grpc/troubleshoot?view=aspnetcore-5.0#call-insecure-grpc-services-with-net-core-client
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+
             services
                 .AddScoped<IDiscountGrpcService, DiscountGrpcService>()
                 .AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(x =>
