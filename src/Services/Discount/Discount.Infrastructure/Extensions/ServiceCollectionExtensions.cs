@@ -27,8 +27,7 @@ namespace Discount.Infrastructure.Extensions
                 .AddRepositories()
                 .AddCustomDbContext(configuration)
                 .AddEntityFrameworkUnitOfWork()
-                .AddDomainEventDispatcher()
-                .AddConsulServiceDiscovery(configuration);
+                .AddDomainEventDispatcher();
         }
 
         /// <summary>
