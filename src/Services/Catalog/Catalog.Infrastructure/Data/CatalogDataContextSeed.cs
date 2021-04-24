@@ -26,7 +26,7 @@ namespace Catalog.Infrastructure.Data
 
                 await catalogDataContext.SaveChangesAsync();
 
-                logger.LogInformation("Seed database associated with context {DbContextName}", typeof(CatalogDataContext).Name);
+                logger.LogInformation("Seed database associated with context {DbContextName}", nameof(CatalogDataContext));
             }
 
             if (!catalogDataContext.CatalogItems.Any())
@@ -35,7 +35,7 @@ namespace Catalog.Infrastructure.Data
 
                 await catalogDataContext.SaveChangesAsync();
 
-                logger.LogInformation("Seed database associated with context {DbContextName}", typeof(CatalogDataContext).Name);
+                logger.LogInformation("Seed database associated with context {DbContextName}", nameof(CatalogDataContext));
             }
         }
 
