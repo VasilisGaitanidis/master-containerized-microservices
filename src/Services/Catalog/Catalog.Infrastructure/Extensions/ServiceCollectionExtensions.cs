@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Catalog.Domain.Repositories;
+using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Extensions;

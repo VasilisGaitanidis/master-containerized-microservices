@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Catalog.Infrastructure
+namespace Catalog.Infrastructure.Data
 {
     public class CatalogDataContext : AppDbContext
     {

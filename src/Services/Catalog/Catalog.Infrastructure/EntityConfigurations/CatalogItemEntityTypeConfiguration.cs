@@ -1,5 +1,6 @@
 ﻿using System;
 using Catalog.Domain.Models;
+using Catalog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
