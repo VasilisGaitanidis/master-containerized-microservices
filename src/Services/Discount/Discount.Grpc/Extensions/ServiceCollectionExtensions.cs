@@ -1,10 +1,4 @@
-﻿using System.Reflection;
-using AutoMapper;
-using Discount.Application.Behaviors;
-using FluentValidation;
-using Infrastructure.Extensions;
-using MediatR;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Discount.Grpc.Extensions
@@ -26,5 +20,10 @@ namespace Discount.Grpc.Extensions
             return services;
         }
 
+        public static IServiceCollection AddGrpcAutoMapper(this IServiceCollection services)
+        {
+            return services
+                .AddAutoMapper(typeof(Startup));
+        }
     }
 }

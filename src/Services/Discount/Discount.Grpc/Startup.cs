@@ -28,6 +28,7 @@ namespace Discount.Grpc
                 .AddDiscountApplication()
                 .AddDiscountInfrastructure(Configuration)
                 .AddCustomHealthChecks(Configuration)
+                .AddGrpcAutoMapper()
                 .AddGrpc();
         }
 
