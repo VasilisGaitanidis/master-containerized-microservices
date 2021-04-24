@@ -18,7 +18,7 @@ namespace Catalog.Infrastructure.Data
 
         #endregion
 
-        public static async Task SeedAsync(CatalogDataContext catalogDataContext, ILogger<CatalogDataContext> logger)
+        public static async Task SeedAsync(CatalogDataContext catalogDataContext, ILogger<CatalogDataContextSeed> logger)
         {
             if (!catalogDataContext.CatalogTypes.Any())
             {
