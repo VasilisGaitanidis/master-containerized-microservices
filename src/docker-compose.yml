@@ -31,6 +31,16 @@ services:
     networks:
       - microstore
 
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+    depends_on:
+      - sqlserver
+    networks:
+      - microstore
+
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: always

@@ -6,12 +6,12 @@ using Infrastructure.DomainEvents;
 
 namespace Infrastructure.Data
 {
-    public class UnitOfWork : IUnitOfWork
+    public class EntityFrameworkUnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
         private readonly IDomainEventDispatcher _domainEventDispatcher;
 
-        public UnitOfWork(AppDbContext context, IDomainEventDispatcher domainEventDispatcher)
+        public EntityFrameworkUnitOfWork(AppDbContext context, IDomainEventDispatcher domainEventDispatcher)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _domainEventDispatcher = domainEventDispatcher ?? throw new ArgumentNullException(nameof(domainEventDispatcher));

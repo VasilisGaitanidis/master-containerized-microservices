@@ -25,6 +25,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Redis=redis:6379
+      - ConnectionStrings__DiscountGrpcUrl=http://discount.grpc
       - RabbitMq__Host=rabbitmq
       - RabbitMq__Username=guest
       - RabbitMq__Password=guest
@@ -32,6 +33,13 @@ services:
       - Serilog__WriteTo__1__Args__serverUrl=http://seq
       - Consul__ConsulAddress=http://consul:8500
       - Consul__ServiceAddress=http://cart.api
+    ports:
+      - "80"
+
+  discount.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DiscountSqlServer=Server=sqlserver;Database=DiscountDb;User Id=sa;Password=<MyStrongP@ssw0rd>;
     ports:
       - "80"
 
@@ -75,7 +83,7 @@ services:
     ports:
       - "5000:80"
       - "443"
-    
+
 volumes:
   sqlserver-data:
     external: false
@@ -84,6 +92,4 @@ volumes:
     external: false
 
   consul-data:
-    external: false  
-
-
+    external: false
