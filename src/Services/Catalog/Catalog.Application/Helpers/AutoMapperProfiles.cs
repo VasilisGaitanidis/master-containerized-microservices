@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Catalog.Application.Dtos.Responses;
-using Catalog.Domain.Models;
+using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Helpers
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Models;
 
-namespace Catalog.Domain.Models
+namespace Catalog.Domain.Entities
 {
     public class CatalogType : Entity<Guid>
     {

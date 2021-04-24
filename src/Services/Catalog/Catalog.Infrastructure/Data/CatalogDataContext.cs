@@ -1,5 +1,5 @@
 ﻿using System;
-using Catalog.Domain.Models;
+using Catalog.Domain.Entities;
 using Catalog.Infrastructure.EntityConfigurations;
 using Infrastructure.Data;
 using Infrastructure.Helpers;
