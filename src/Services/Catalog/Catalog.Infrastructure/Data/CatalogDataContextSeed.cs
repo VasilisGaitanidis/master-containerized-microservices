@@ -13,8 +13,8 @@ namespace Catalog.Infrastructure.Data
         private static readonly CatalogType DemoCatalogType1 = new CatalogType("Demo Catalog Type 1");
         private static readonly CatalogType DemoCatalogType2 = new CatalogType("Demo Catalog Type 2");
 
-        private static readonly CatalogItem DemoCatalogItem1 = new CatalogItem("Demo name 1", "Demo description 1", 25, 50, DemoCatalogType1.Id);
-        private static readonly CatalogItem DemoCatalogItem2 = new CatalogItem("Demo name 2", "Demo description 2", 19.99M, 90, DemoCatalogType2.Id);
+        private static readonly CatalogItem DemoCatalogItem1 = new CatalogItem("Demo1", "Demo description 1", 25, 50, DemoCatalogType1.Id);
+        private static readonly CatalogItem DemoCatalogItem2 = new CatalogItem("Demo2", "Demo description 2", 19.99M, 90, DemoCatalogType2.Id);
 
         #endregion
 
