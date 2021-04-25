@@ -1,13 +1,13 @@
 ﻿using System;
-using Catalog.Domain.Models;
-using Catalog.Infrastructure.EntityConfigurations;
+using Catalog.Domain.Entities;
+using Catalog.Infrastructure.Configurations;
 using Infrastructure.Data;
 using Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Catalog.Infrastructure
+namespace Catalog.Infrastructure.Data
 {
     public class CatalogDataContext : AppDbContext
     {

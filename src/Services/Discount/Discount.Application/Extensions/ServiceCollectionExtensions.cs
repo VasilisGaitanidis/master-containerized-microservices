@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using AutoMapper;
 using Discount.Application.Behaviors;
 using FluentValidation;
 using MediatR;

@@ -2,9 +2,9 @@
 
 ```bash
 $ dotnet ef migrations add InitialMigration
-$ dotnet ef migrations database update
+$ dotnet ef database update
 ```
 
 ```bash
-$ dotnet ef migrations script -o .\Scripts\InitialMigration.sql
+$ dotnet ef migrations script -o .\Scripts\Migration.sql
 ```
