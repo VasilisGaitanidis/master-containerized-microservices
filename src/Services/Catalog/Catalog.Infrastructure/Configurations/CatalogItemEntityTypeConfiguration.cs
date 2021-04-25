@@ -4,7 +4,7 @@ using Catalog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Catalog.Infrastructure.EntityConfigurations
+namespace Catalog.Infrastructure.Configurations
 {
     public class CatalogItemEntityTypeConfiguration : IEntityTypeConfiguration<CatalogItem>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Catalog.Domain.Entities;
-using Catalog.Infrastructure.EntityConfigurations;
+using Catalog.Infrastructure.Configurations;
 using Infrastructure.Data;
 using Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
