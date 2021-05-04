@@ -48,11 +48,11 @@ namespace Ordering.Domain.Entities
         /// <summary>
         /// The order's buyer.
         /// </summary>
-        public Buyer Buyer { get; protected set; }
+        public virtual Buyer Buyer { get; protected set; }
 
         /// <summary>
         /// The order's items.
         /// </summary>
-        public IEnumerable<OrderItem> Items { get; protected set; }
+        public virtual IEnumerable<OrderItem> Items { get; protected set; }
     }
 }

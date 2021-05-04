@@ -39,6 +39,6 @@ namespace Ordering.Domain.Entities
         /// <summary>
         /// The order item's order.
         /// </summary>
-        public Order Order { get; protected set; }
+        public virtual Order Order { get; protected set; }
     }
 }

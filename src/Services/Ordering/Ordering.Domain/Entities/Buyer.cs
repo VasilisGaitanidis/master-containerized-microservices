@@ -61,6 +61,6 @@ namespace Ordering.Domain.Entities
         /// <summary>
         /// The buyer's orders.
         /// </summary>
-        public IEnumerable<Order> Orders { get; protected set; }
+        public virtual IEnumerable<Order> Orders { get; protected set; }
     }
 }
