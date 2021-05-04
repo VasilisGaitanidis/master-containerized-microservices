@@ -17,6 +17,9 @@ services:
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.Api/Dockerfile
+    depends_on:
+      - sqlserver
+      - rabbitmq
     networks:
       - microstore
 
