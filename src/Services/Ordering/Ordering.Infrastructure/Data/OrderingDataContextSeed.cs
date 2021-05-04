@@ -31,18 +31,18 @@ namespace Ordering.Infrastructure.Data
                 logger.LogInformation("Seed database associated with context {DbContextName}", nameof(OrderingDataContext));
             }
 
-            if (!catalogDataContext.OrderItems.Any())
+            if (!catalogDataContext.Orders.Any())
             {
-                catalogDataContext.OrderItems.AddRange(GetPreconfiguredOrderItems());
+                catalogDataContext.Orders.AddRange(GetPreconfiguredOrders());
 
                 await catalogDataContext.SaveChangesAsync();
 
                 logger.LogInformation("Seed database associated with context {DbContextName}", nameof(OrderingDataContext));
             }
 
-            if (!catalogDataContext.Orders.Any())
+            if (!catalogDataContext.OrderItems.Any())
             {
-                catalogDataContext.Orders.AddRange(GetPreconfiguredOrders());
+                catalogDataContext.OrderItems.AddRange(GetPreconfiguredOrderItems());
 
                 await catalogDataContext.SaveChangesAsync();
 
