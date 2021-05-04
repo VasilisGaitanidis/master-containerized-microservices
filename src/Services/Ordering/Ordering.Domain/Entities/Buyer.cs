@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.Models;
 
 namespace Ordering.Domain.Entities
@@ -30,31 +31,36 @@ namespace Ordering.Domain.Entities
         /// <summary>
         /// The buyer's fist name.
         /// </summary>
-        public string FirstName { get; }
+        public string FirstName { get; protected set; }
 
         /// <summary>
         /// The buyer's last name.
         /// </summary>
-        public string LastName { get; }
+        public string LastName { get; protected set; }
 
         /// <summary>
         /// The buyer's email.
         /// </summary>
-        public string Email { get; }
+        public string Email { get; protected set; }
 
         /// <summary>
         /// The buyer's country.
         /// </summary>
-        public string Country { get; }
+        public string Country { get; protected set; }
 
         /// <summary>
         /// The buyer's state.
         /// </summary>
-        public string State { get; }
+        public string State { get; protected set; }
 
         /// <summary>
         /// The buyer's zip code.
         /// </summary>
-        public string ZipCode { get; }
+        public string ZipCode { get; protected set; }
+
+        /// <summary>
+        /// The buyer's orders.
+        /// </summary>
+        public IEnumerable<Order> Orders { get; protected set; }
     }
 }

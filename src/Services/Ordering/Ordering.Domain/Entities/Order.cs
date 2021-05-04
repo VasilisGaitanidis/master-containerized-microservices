@@ -29,26 +29,26 @@ namespace Ordering.Domain.Entities
         /// <summary>
         /// The order's username.
         /// </summary>
-        public string Username { get; }
+        public string Username { get; protected set; }
 
         /// <summary>
         /// The order's total price.
         /// </summary>
-        public decimal TotalPrice { get; }
+        public decimal TotalPrice { get; protected set; }
         
         /// <summary>
         /// The order's shipping address.
         /// </summary>
-        public string ShippingAddress { get; }
+        public string ShippingAddress { get; protected set; }
 
         /// <summary>
         /// The order's buyer.
         /// </summary>
-        public Buyer Buyer { get; }
+        public Buyer Buyer { get; protected set; }
 
         /// <summary>
         /// The order's items.
         /// </summary>
-        public IEnumerable<OrderItem> Items { get; }
+        public IEnumerable<OrderItem> Items { get; protected set; }
     }
 }

@@ -24,16 +24,21 @@ namespace Ordering.Domain.Entities
         /// <summary>
         /// The order item quantity.
         /// </summary>
-        public int Quantity { get; }
+        public int Quantity { get; protected set; }
 
         /// <summary>
         /// The shopping cart price.
         /// </summary>
-        public decimal Price { get; }
+        public decimal Price { get; protected set; }
 
         /// <summary>
         /// The shopping cart product name.
         /// </summary>
-        public string ProductName { get; }
+        public string ProductName { get; protected set; }
+
+        /// <summary>
+        /// The order item's order.
+        /// </summary>
+        public Order Order { get; protected set; }
     }
 }
