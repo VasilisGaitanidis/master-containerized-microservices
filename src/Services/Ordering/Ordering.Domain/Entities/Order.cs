@@ -9,6 +9,10 @@ namespace Ordering.Domain.Entities
     /// </summary>
     public class Order : AggregateRoot<Guid>
     {
+        protected Order() : base(Guid.NewGuid())
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Order"/>.
         /// </summary>
@@ -17,7 +21,7 @@ namespace Ordering.Domain.Entities
         /// <param name="shippingAddress">The order's shipping address.</param>
         /// <param name="buyer">The order's buyer. </param>
         /// <param name="items">The order's items.</param>
-        public Order(string username, decimal totalPrice, string shippingAddress, Buyer buyer, IEnumerable<OrderItem> items) : base(Guid.NewGuid())
+        public Order(string username, decimal totalPrice, string shippingAddress, Buyer buyer, IEnumerable<OrderItem> items) : this()
         {
             Username = username ?? throw new ArgumentNullException(nameof(username));
             TotalPrice = totalPrice;
