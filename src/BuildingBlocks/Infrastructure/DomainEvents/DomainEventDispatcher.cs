@@ -27,7 +27,7 @@ namespace Infrastructure.DomainEvents
                 .Where(e =>
                 {
                     var baseType = e.GetType().BaseType;
-                    return baseType is { } && baseType.IsGenericType && baseType.GetGenericTypeDefinition()
+                    return baseType is { IsGenericType: true } && baseType.GetGenericTypeDefinition()
                         .IsAssignableFrom(typeof(AggregateRoot<>));
                 })
                 .Where(e => e.AsDynamic().DomainEvents.Count > 0)
