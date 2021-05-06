@@ -18,7 +18,7 @@ namespace Cart.Domain.Entities
         }
 
         /// <summary>
-        /// The username 
+        /// The shopping cart's username.
         /// </summary>
         public string Username { get; }
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Cart.Application.Dtos.Requests;
 using Cart.Application.Dtos.Responses;
+using Cart.Application.UseCases.Commands.CheckoutShoppingCart;
 using Cart.Application.UseCases.Commands.DeleteShoppingCart;
 using Cart.Application.UseCases.Commands.UpdateShoppingCart;
 using Cart.Application.UseCases.Queries.GetShoppingCartByUsername;
@@ -28,6 +29,18 @@ namespace Cart.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ShoppingCartDto>> GetShoppingCartAsync(string username)
             => Ok(await _mediator.Send(new GetShoppingCartByUsernameQuery(username)));
+
+        [HttpPost]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        public async Task<IActionResult> CheckoutAsync([FromBody] CheckoutShoppingCartDto dto)
+        {
+            await _mediator.Send(new CheckoutShoppingCartCommand(dto.Username,
+                dto.TotalPrice,
+                dto.ShippingAddress,
+                dto.Buyer));
+            return Accepted();
+        }
 
         [HttpPut]
         [Route("update")]

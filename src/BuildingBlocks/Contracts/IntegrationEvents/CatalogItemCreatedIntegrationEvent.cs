@@ -2,7 +2,6 @@
 
 namespace Contracts.IntegrationEvents
 {
-    // ReSharper disable once InconsistentNaming
     public interface CatalogItemCreatedIntegrationEvent
     {
         string Name { get; }
