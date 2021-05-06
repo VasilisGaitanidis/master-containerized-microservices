@@ -12,6 +12,7 @@ namespace Discount.Infrastructure.Data
 
         private static readonly Coupon DemoCoupon1 = new Coupon("Demo1", "Demo product description 1", 6);
         private static readonly Coupon DemoCoupon2 = new Coupon("Demo2", "Demo product description 2", 4);
+        private static readonly Coupon DemoCoupon3 = new Coupon("string", "String description", 4);
 
         #endregion
 
@@ -32,7 +33,8 @@ namespace Discount.Infrastructure.Data
             return new List<Coupon>
             {
                 DemoCoupon1,
-                DemoCoupon2
+                DemoCoupon2,
+                DemoCoupon3
             };
         }
     }
