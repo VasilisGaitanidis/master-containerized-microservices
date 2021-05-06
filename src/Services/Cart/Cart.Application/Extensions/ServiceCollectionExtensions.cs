@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using AutoMapper;
 using Cart.Application.Behaviors;
 using FluentValidation;
 using MediatR;
