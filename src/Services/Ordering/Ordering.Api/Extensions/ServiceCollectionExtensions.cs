@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Ordering.Api.Configuration;
+using Ordering.Api.Consumers;
 using Ordering.Api.Filters;
 
 namespace Ordering.Api.Extensions
@@ -44,6 +45,8 @@ namespace Ordering.Api.Extensions
             {
                 x.SetKebabCaseEndpointNameFormatter();
 
+                x.AddConsumer<ShoppingCartCheckoutConsumer>();
+
                 x.UsingRabbitMq((context, configurator) =>
                 {
                     configurator.UseHealthCheck(context);
@@ -52,6 +55,7 @@ namespace Ordering.Api.Extensions
                         h.Username(rabbitMqOptions.Username);
                         h.Password(rabbitMqOptions.Password);
                     });
+                    configurator.ConfigureEndpoints(context);
                 });
             }).AddMassTransitHostedService();
         }
