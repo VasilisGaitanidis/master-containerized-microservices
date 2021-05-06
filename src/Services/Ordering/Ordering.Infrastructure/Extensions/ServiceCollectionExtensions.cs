@@ -26,8 +26,6 @@ namespace Ordering.Infrastructure.Extensions
             return services
                 .AddRepositories()
                 .AddCustomDbContext(configuration)
-                .AddEntityFrameworkUnitOfWork()
-                .AddDomainEventDispatcher()
                 .AddConsulServiceDiscovery(configuration);
         }
 
