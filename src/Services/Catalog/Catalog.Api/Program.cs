@@ -1,4 +1,5 @@
 using System;
+using Catalog.Infrastructure.Extensions;
 using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -20,7 +21,10 @@ namespace Catalog.Api
             try
             {
                 Log.Information("Application starting up");
-                CreateHostBuilder(args).Build().Run();
+                CreateHostBuilder(args)
+                    .Build()
+                    .MigrateDatabase()
+                    .Run();
             }
             catch (Exception ex)
             {

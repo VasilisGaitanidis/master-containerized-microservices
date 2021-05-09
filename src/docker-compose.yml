@@ -17,6 +17,9 @@ services:
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.Api/Dockerfile
+    depends_on:
+      - sqlserver
+      - rabbitmq
     networks:
       - microstore
 
@@ -26,7 +29,18 @@ services:
       context: .
       dockerfile: Services/Cart/Cart.Api/Dockerfile
     depends_on:
+      - redis
       - rabbitmq
+    networks:
+      - microstore
+
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+    depends_on:
+      - sqlserver
     networks:
       - microstore
 
@@ -36,18 +50,27 @@ services:
     networks:
       - microstore
 
+  redis:
+    image: redis:alpine
+    restart: always
+    networks:
+      - microstore
+  
   rabbitmq:
     image: rabbitmq:3-management
+    restart: always
     networks:
       - microstore
 
   seq:
     image: datalust/seq
+    restart: always
     networks:
       - microstore
 
   consul:
     image: consul
+    restart: always
     networks:
       - microstore
 

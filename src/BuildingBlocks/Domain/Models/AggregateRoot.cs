@@ -42,6 +42,7 @@ namespace Domain.Models
 
         protected AggregateRoot(TId id) : base(id)
         {
+            _domainEvents = new List<DomainEvent>();
         }
 
         /// <inheritdoc />

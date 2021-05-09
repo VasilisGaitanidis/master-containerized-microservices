@@ -1,17 +1,57 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Cart.Application.Dtos.Requests;
+using Cart.Application.Dtos.Responses;
+using Cart.Application.UseCases.Commands.CheckoutShoppingCart;
+using Cart.Application.UseCases.Commands.DeleteShoppingCart;
+using Cart.Application.UseCases.Commands.UpdateShoppingCart;
+using Cart.Application.UseCases.Queries.GetShoppingCartByUsername;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cart.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CartController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult Post()
+        private readonly IMediator _mediator;
+
+        public CartController(IMediator mediator)
         {
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
+
+        [HttpGet]
+        [Route("{username}")]
+        [ProducesResponseType(typeof(ShoppingCartDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ShoppingCartDto>> GetShoppingCartAsync(string username)
+            => Ok(await _mediator.Send(new GetShoppingCartByUsernameQuery(username)));
+
+        [HttpPost]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        public async Task<IActionResult> CheckoutAsync([FromBody] CheckoutShoppingCartDto dto)
+        {
+            await _mediator.Send(new CheckoutShoppingCartCommand(dto.Username,
+                dto.TotalPrice,
+                dto.ShippingAddress,
+                dto.Buyer));
             return Accepted();
         }
 
+        [HttpPut]
+        [Route("update")]
+        [ProducesResponseType(typeof(ShoppingCartDto), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ShoppingCartDto>> UpdateShoppingCartAsync([FromBody] UpdateShoppingCartDto dto)
+            => Ok(await _mediator.Send(new UpdateShoppingCartCommand(dto.Username, dto.Items)));
+
+        [HttpDelete]
+        [Route("{username}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteShoppingCartAsync(string username)
+            => Ok(await _mediator.Send(new DeleteShoppingCartCommand(username)));
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Catalog.Domain.Models;
+using Catalog.Domain.Entities;
 using Catalog.Domain.Repositories;
+using Catalog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Repositories
@@ -26,7 +27,7 @@ namespace Catalog.Infrastructure.Repositories
             return catalogItem;
         }
 
-        public async Task<List<CatalogItem>> GetCatalogItemsAsync()
+        public async Task<IEnumerable<CatalogItem>> GetCatalogItemsAsync()
         {
             var catalogItems = await _context.CatalogItems
                 .ToListAsync();

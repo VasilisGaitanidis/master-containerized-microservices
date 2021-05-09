@@ -1,5 +1,6 @@
 ﻿using Cart.Api.Configuration;
 using Cart.Api.Consumers;
+using Cart.Api.Filters;
 using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
@@ -12,26 +13,26 @@ namespace Cart.Api.Extensions
     {
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
-            services.AddControllers(
-                //options =>
-                //{
-                //    options.Filters.Add<HttpGlobalExceptionFilter>();
-                //}
-                );
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<HttpGlobalExceptionFilter>();
+            });
 
             return services;
         }
 
-        public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
         {
+            var swaggerOptions = configuration.GetOptions<SwaggerOptions>("Swagger");
+
             return services
                 .AddSwaggerGen(x =>
                 {
-                    x.SwaggerDoc("v1", new OpenApiInfo
+                    x.SwaggerDoc(swaggerOptions.Name, new OpenApiInfo
                     {
-                        Title = "Cart API",
-                        Version = "v1",
-                        Description = "The cart microservice."
+                        Title = swaggerOptions.Title,
+                        Version = swaggerOptions.Version,
+                        Description = swaggerOptions.Description
                     });
                 });
         }
@@ -57,6 +58,18 @@ namespace Cart.Api.Extensions
                     configurator.ConfigureEndpoints(context);
                 });
             }).AddMassTransitHostedService();
+        }
+
+        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
+        {
+            var healthChecksBuilder = services.AddHealthChecks();
+
+            healthChecksBuilder.AddRedis(
+                configuration.GetConnectionString("Redis"),
+                name: "CartRedis-check",
+                tags: new[] { "cart-redis" });
+
+            return services;
         }
     }
 }

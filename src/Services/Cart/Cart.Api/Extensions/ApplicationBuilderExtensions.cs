@@ -11,7 +11,5 @@ namespace Cart.Api.Extensions
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cart.API V1");
             });
         }
-
-        
     }
 }

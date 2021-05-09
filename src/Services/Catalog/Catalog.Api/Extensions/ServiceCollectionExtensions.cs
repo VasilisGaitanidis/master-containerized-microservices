@@ -12,11 +12,10 @@ namespace Catalog.Api.Extensions
     {
         public static IServiceCollection AddCustomControllers(this IServiceCollection services)
         {
-            services.AddControllers(
-                options =>
-                {
-                    options.Filters.Add<HttpGlobalExceptionFilter>();
-                });
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<HttpGlobalExceptionFilter>();
+            });
 
             return services;
         }
@@ -64,14 +63,14 @@ namespace Catalog.Api.Extensions
             healthChecksBuilder.AddSqlServer(
                 configuration.GetConnectionString("CatalogSqlServer"),
                 name: "CatalogSqlServer-check",
-                tags: new[] { "catalogsqlserver" });
+                tags: new[] { "catalog-sqlserver" });
 
             var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMq");
 
             healthChecksBuilder.AddRabbitMQ(
                 $"amqp://{rabbitMqOptions.Username}:{rabbitMqOptions.Password}@{rabbitMqOptions.Host}{rabbitMqOptions.VirtualHost}",
                 name: "CatalogRabbitMQ-check",
-                tags: new[] { "catalograbbitmq" });
+                tags: new[] { "catalog-rabbitmq" });
 
             return services;
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Catalog.Domain.Models;
+using Catalog.Domain.Entities;
 using Domain.Data;
 
 namespace Catalog.Domain.Repositories
@@ -10,7 +10,7 @@ namespace Catalog.Domain.Repositories
     {
         Task<CatalogItem> GetCatalogItemAsync(Guid id);
 
-        Task<List<CatalogItem>> GetCatalogItemsAsync();
+        Task<IEnumerable<CatalogItem>> GetCatalogItemsAsync();
 
         Task<CatalogItem> AddAsync(CatalogItem catalogItem);
 
