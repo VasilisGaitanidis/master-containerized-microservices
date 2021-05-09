@@ -15,6 +15,14 @@
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "ServiceName": "cart-service",
       "SwaggerKey": "cart"
+    },
+    {
+      "DownstreamPathTemplate": "/api/order/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/gateway/ordering/{everything}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "ServiceName": "ordering-service",
+      "SwaggerKey": "ordering"
     }
   ],
   "GlobalConfiguration": {
