@@ -63,14 +63,14 @@ namespace Catalog.Api.Extensions
             healthChecksBuilder.AddSqlServer(
                 configuration.GetConnectionString("CatalogSqlServer"),
                 name: "CatalogSqlServer-check",
-                tags: new[] { "catalogsqlserver" });
+                tags: new[] { "catalog-sqlserver" });
 
             var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMq");
 
             healthChecksBuilder.AddRabbitMQ(
                 $"amqp://{rabbitMqOptions.Username}:{rabbitMqOptions.Password}@{rabbitMqOptions.Host}{rabbitMqOptions.VirtualHost}",
                 name: "CatalogRabbitMQ-check",
-                tags: new[] { "catalograbbitmq" });
+                tags: new[] { "catalog-rabbitmq" });
 
             return services;
         }

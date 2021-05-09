@@ -1,8 +1,13 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ordering.Api.Extensions;
+using Ordering.Application.Extensions;
+using Ordering.Infrastructure.Extensions;
 
 namespace Ordering.Api
 {
@@ -18,7 +23,13 @@ namespace Ordering.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services
+                .AddCustomControllers()
+                .AddOrderingApplication()
+                .AddOrderingInfrastructure(Configuration)
+                .AddCustomSwagger(Configuration)
+                .AddCustomMassTransit(Configuration)
+                .AddCustomHealthChecks(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,6 +40,8 @@ namespace Ordering.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCustomSwagger();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -36,6 +49,11 @@ namespace Ordering.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/healthchecks", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }

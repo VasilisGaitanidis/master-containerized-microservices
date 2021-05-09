@@ -15,7 +15,7 @@ namespace Discount.Grpc.Extensions
             healthChecksBuilder.AddSqlServer(
                 configuration.GetConnectionString("DiscountSqlServer"),
                 name: "DiscountSqlServer-check",
-                tags: new[] { "discountsqlserver" });
+                tags: new[] { "discount-sqlserver" });
 
             return services;
         }

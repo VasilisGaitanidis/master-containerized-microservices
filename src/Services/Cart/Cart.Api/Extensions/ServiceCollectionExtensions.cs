@@ -66,8 +66,8 @@ namespace Cart.Api.Extensions
 
             healthChecksBuilder.AddRedis(
                 configuration.GetConnectionString("Redis"),
-                name: "Redis-check",
-                tags: new[] { "cartredis" });
+                name: "CartRedis-check",
+                tags: new[] { "cart-redis" });
 
             return services;
         }

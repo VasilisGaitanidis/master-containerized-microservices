@@ -18,8 +18,16 @@ services:
   ordering.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__OrderingSqlServer=Server=sqlserver;Database=OrderingDb;User Id=sa;Password=<MyStrongP@ssw0rd>;
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq
+      - Consul__ConsulAddress=http://consul:8500
+      - Consul__ServiceAddress=http://ordering.api
     ports:
-      - "5002:80"
+      - "80"
 
   cart.api:
     environment:
