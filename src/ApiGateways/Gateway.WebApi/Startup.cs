@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
+using Ocelot.Provider.Polly;
 
 namespace Gateway.WebApi
 {
@@ -25,7 +26,8 @@ namespace Gateway.WebApi
             services
                 .AddSwaggerForOcelot(Configuration)
                 .AddOcelot()
-                .AddConsul();
+                .AddConsul()
+                .AddPolly();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
